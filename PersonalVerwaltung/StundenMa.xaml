@@ -1,0 +1,54 @@
+﻿<Window x:Class="PersonalVerwaltung.StundenMa"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonalVerwaltung"
+        mc:Ignorable="d"
+        Title="StundenMa" Height="Auto" Width="Auto"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <!-- Leon fügt hier eine Übersicht der Stunden für einen Mitarbeiter ein "Klick auf die Glühbirne"-->
+
+    <Border Background="#272537"
+        CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Personalnummer:" Foreground="White" Margin="10" Grid.Row="0"/>
+            <TextBlock Text="Name:" Foreground="White" Margin="10" Grid.Row="1"/>
+            <TextBlock Text="Vorname:" Foreground="White" Margin="10" Grid.Row="2"/>
+            <TextBox Grid.Row="0" Height="20" Margin="10" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="1" Height="20" Margin="10" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="2" Height="20" Margin="10" VerticalAlignment="Center"/>
+            <ListView Grid.Row="3">
+                Stundenanzeige der MA
+            </ListView>
+            <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
+                <ToolBarTray Grid.Row="1" Background="Transparent">
+                    <ToolBar Background="Transparent" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
+                        <Menu Background="Transparent" ToolBar.OverflowMode="Never">
+                            <Button Background="Transparent" Width="50">
+                                <TextBlock Foreground="White" FontSize="20">✏️</TextBlock>
+                            </Button>
+                            <Button Background="Transparent" Width="50">
+                                <TextBlock Foreground="White" FontSize="20">🗑️</TextBlock>
+                            </Button>
+                            <Button Background="Transparent" Width="50">
+                                <TextBlock Foreground="White" FontSize="20"> ❌</TextBlock>
+                            </Button>
+                        </Menu>
+                    </ToolBar>
+                </ToolBarTray>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

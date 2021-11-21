@@ -1,0 +1,87 @@
+﻿<Window x:Class="PersonalVerwaltung.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonalVerwaltung"
+        mc:Ignorable="d"
+        MinHeight="700" MinWidth="1250"
+        
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        Background="Transparent"
+        AllowsTransparency="True">
+
+    <Border Background="#272537"
+            CornerRadius="20">
+        <Grid x:Name="main">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="293"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="grid1" Grid.Column="2" Grid.Row="2"/>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="C:\Users\Ilja\source\repos\PersonalVerwaltung\PersonalVerwaltung\Images\verwaltung.png" Margin="5"/>
+                <TextBlock Margin="20" Text="PersoVi" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Margin="20">
+                <Button x:Name="btn_personalplanung" Click="personalplanung" Margin="10" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="C:\Users\Ilja\source\repos\PersonalVerwaltung\PersonalVerwaltung\Images\kalender.png"
+                           Height="45"/>
+                        <TextBlock VerticalAlignment="Center" Margin="5">
+                            Personalplanung
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btn_mitarbeiter" Click="mitarbeiter" Margin="10" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="C:\Users\Ilja\source\repos\PersonalVerwaltung\PersonalVerwaltung\Images\nutzer.png"
+                           Height="45"/>
+                        <TextBlock VerticalAlignment="Center" Margin="5">
+                            Mitarbeiter
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btn_studenerfassung" Click="stundenerfassung" Margin="10" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="C:\Users\Ilja\source\repos\PersonalVerwaltung\PersonalVerwaltung\Images\uhr.png"
+                           Height="45"/>
+                        <TextBlock VerticalAlignment="Center" Margin="5">
+                            Stundenerfassung
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btn_lohnabrechnung" Click="lohnabrechnung" Margin="10" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="C:\Users\Ilja\source\repos\PersonalVerwaltung\PersonalVerwaltung\Images\geld-bekommen.png"
+                           Height="45"/>
+                        <TextBlock VerticalAlignment="Center" Margin="5">
+                            Lohnabrechnung
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btn_einstellung" Click="einstellungen" Margin="10" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="C:\Users\Ilja\source\repos\PersonalVerwaltung\PersonalVerwaltung\Images\die-einstellungen.png"
+                           Height="45"/>
+                        <TextBlock VerticalAlignment="Center" Margin="5">
+                            Einstellungen
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">UserName</TextBlock>
+                <Button x:Name="btn_logout" Click="Logout" FontFamily="Arial rounded MT" Margin="20">Logout</Button>
+                <Button x:Name="btn_minimize" Click="minimize" FontFamily="Marlett" Content="0" Width="40"/>
+                <Button x:Name="btn_smaller" Click="smaller" FontFamily="Marlett" Content="2" Width="40"/>
+                <Button x:Name="btn_shutdown" Click="shutdown" FontFamily="Marlett" Content="r" Foreground="Red" Width="40"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
