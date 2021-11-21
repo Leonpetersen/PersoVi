@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:PersonalVerwaltung"
         mc:Ignorable="d"
         MinHeight="700" MinWidth="1250"
-        
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
         Background="Transparent"

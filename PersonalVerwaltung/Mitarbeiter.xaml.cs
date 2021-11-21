@@ -39,16 +39,16 @@ namespace PersonalVerwaltung
         }
         private void Btn_Add(object sender, RoutedEventArgs e)
         {
-            Window MaAddEdit = new Window();
-            MaAddEdit.Show();
+            MaAdd maAddEdit = new MaAdd();
+            maAddEdit.Show();
         }
         /*private void Btn_Remove(object sender, RoutedEventArgs e)
 		{
 		}*/
-        private void Btn_Edit(object sender, RoutedEventArgs e)
+        private void showEmployee(object sender, RoutedEventArgs e)
         {
-            Window MaAddEdit = new Window();
-            MaAddEdit.Show();
+            MAanzeige maAnzeige = new MAanzeige();
+            maAnzeige.Show();
         }
         private void ToolBar_Loaded(object sender, RoutedEventArgs e)
         {

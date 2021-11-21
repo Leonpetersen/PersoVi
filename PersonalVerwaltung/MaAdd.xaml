@@ -10,39 +10,24 @@
         WindowStyle="None"
         AllowsTransparency="True">
 
-    <Border Background="#272537"
-        CornerRadius="20">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Personalnummer:" Foreground="White" Margin="10" Grid.Row="0"/>
-            <TextBlock Text="Name:" Foreground="White" Margin="10" Grid.Row="1"/>
-            <TextBlock Text="Vorname:" Foreground="White" Margin="10" Grid.Row="2"/>
-            <TextBlock Text="Geburtsdatum:" Foreground="White" Margin="10" Grid.Row="3"/>
-            <TextBlock Text="Adresse:" Foreground="White" Margin="10" Grid.Row="4"/>
-            <TextBox Grid.Row="0" Height="20" Margin="10" VerticalAlignment="Bottom"/>
-            <TextBox Grid.Row="1" Height="20" Margin="10" VerticalAlignment="Bottom"/>
-            <TextBox Grid.Row="2" Height="20" Margin="10" VerticalAlignment="Bottom"/>
-            <TextBox Grid.Row="3" Height="20" Margin="10" VerticalAlignment="Bottom"/>
-            <TextBox Grid.Row="4" Height="20" Margin="10" VerticalAlignment="Bottom"/>
-            <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
-                <Button Background="Transparent" Grid.Row="3">
-                    <TextBlock FontSize="20">
-                 💾
-                    </TextBlock>
-                </Button>
-                <Button Background="Transparent" Grid.Row="3">
-                    <TextBlock FontSize="20">
-                 ❌
-                    </TextBlock>
-                </Button>
+    <Border Background="#272537" CornerRadius="20">
+        <StackPanel HorizontalAlignment="Center" Width="600">
+            <Label Content="Vorname:"/>
+            <TextBox x:Name="vorname" Width="100" HorizontalAlignment="Left"/>
+            <Label Content="Nachname:"/>
+            <TextBox x:Name="nachname" Width="100" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Plz:"/>
+                <Label Content="Ort:" Margin="80,0,0,0"/>
             </StackPanel>
-        </Grid>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox x:Name="combo_plz" Width="80"/>
+                <TextBox x:Name="ort" Margin="15,0,0,0" Width="150"/>
+            </StackPanel>
+            <Label Content="E-Mail:"/>
+            <TextBox x:Name="email" Width="100" HorizontalAlignment="Left"/>
+            <Label Content="Abteilung:"/>
+            <ComboBox x:Name="combo_abt" Width="80" HorizontalAlignment="Left"/>
+        </StackPanel>
     </Border>
 </Window>
