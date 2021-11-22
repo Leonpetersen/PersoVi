@@ -22,6 +22,30 @@ namespace PersonalVerwaltung
         public MaAdd()
         {
             InitializeComponent();
+            ort.IsReadOnly = true;
+            ort.Background = Brushes.LavenderBlush;
+        }
+
+        private void saveEmployeeData(object sender, RoutedEventArgs e)
+        {
+            //Popup to confirm database insert
+
+            //Insert
+            Employee employee = new Employee(vorname, nachname, strasse, combo_plz.SelectedItem, email, combo_abt.SelectedItem, telefon, combo_marital.SelectedItem, combo_beruf.SelectedItem, eintritt);
+            employee.createEmployee();
+        }
+
+        private void closeWindow(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void onMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
         }
     }
 }

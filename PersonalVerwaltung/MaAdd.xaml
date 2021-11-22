@@ -3,19 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:PersonalVerwaltung"
         mc:Ignorable="d"
-        Title="MaAdd" Height="450" Width="800" 
+        Title="MaAdd" Height="500" Width="400" 
         Background="Transparent"
         WindowStyle="None"
+        MouseMove="onMouseMove"
         AllowsTransparency="True">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+    </Window.Resources>
 
     <Border Background="#272537" CornerRadius="20">
-        <StackPanel HorizontalAlignment="Center" Width="600">
-            <Label Content="Vorname:"/>
+        <StackPanel HorizontalAlignment="Center" Margin="10">
+            <Label Content="Vorname:" />
             <TextBox x:Name="vorname" Width="100" HorizontalAlignment="Left"/>
             <Label Content="Nachname:"/>
             <TextBox x:Name="nachname" Width="100" HorizontalAlignment="Left"/>
+            <Label Content="Straße &amp; Hausnummer:"/>
+            <TextBox x:Name="strasse" Width="100" HorizontalAlignment="Left"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Plz:"/>
                 <Label Content="Ort:" Margin="80,0,0,0"/>
@@ -24,10 +39,31 @@
                 <ComboBox x:Name="combo_plz" Width="80"/>
                 <TextBox x:Name="ort" Margin="15,0,0,0" Width="150"/>
             </StackPanel>
+            <Label Content="Familienstand:"/>
+            <ComboBox x:Name="combo_marital" Width="150" HorizontalAlignment="Left"/>
             <Label Content="E-Mail:"/>
             <TextBox x:Name="email" Width="100" HorizontalAlignment="Left"/>
+            <Label Content="Telefon:"/>
+            <TextBox x:Name="telefon" Width="100" HorizontalAlignment="Left"/>
             <Label Content="Abteilung:"/>
-            <ComboBox x:Name="combo_abt" Width="80" HorizontalAlignment="Left"/>
+            <ComboBox x:Name="combo_abt" Width="150" HorizontalAlignment="Left"/>
+            <Label Content="Beruf:"/>
+            <ComboBox x:Name="combo_beruf" Width="150" HorizontalAlignment="Left"/>
+            <Label Content="Eintrittsdatum:"/>
+            <DatePicker Name="eintritt" Width="150" HorizontalAlignment="Left" SelectedDate="{x:Static sys:DateTime.Now}"/>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <Button Background="Transparent" Grid.Row="3" HorizontalAlignment="Left" Click="saveEmployeeData">
+                    <TextBlock FontSize="20">
+                 💾
+                    </TextBlock>
+                </Button>
+                <Button Background="Transparent" Grid.Row="3" HorizontalAlignment="Left" Click="closeWindow">
+                    <TextBlock FontSize="20">
+                 ❌
+                    </TextBlock>
+                </Button>
+            </StackPanel>
+
         </StackPanel>
     </Border>
 </Window>
