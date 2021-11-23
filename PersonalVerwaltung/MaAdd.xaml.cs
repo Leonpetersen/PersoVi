@@ -31,7 +31,7 @@ namespace PersonalVerwaltung
             //Popup to confirm database insert
 
             //Insert
-            Employee employee = new Employee(vorname, nachname, strasse, combo_plz.SelectedItem, email, combo_abt.SelectedItem, telefon, combo_marital.SelectedItem, combo_beruf.SelectedItem, eintritt);
+            Employee employee = new Employee(vorname.Text, nachname.Text, strasse.Text, (int)combo_plz.SelectedItem, email.Text, (int)combo_abt.SelectedItem, int.Parse(telefon.Text), combo_marital.SelectedItem.ToString(), int.Parse(combo_beruf.SelectedItem.ToString()), eintritt.SelectedDate.Value);
             employee.createEmployee();
         }
 

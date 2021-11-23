@@ -6,7 +6,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:PersonalVerwaltung"
         mc:Ignorable="d"
-        Title="MaAdd" Height="500" Width="400" 
+        Title="MaAdd" Height="550" Width="400" 
         Background="Transparent"
         WindowStyle="None"
         MouseMove="onMouseMove"
