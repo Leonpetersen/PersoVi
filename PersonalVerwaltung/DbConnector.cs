@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PersonalVerwaltung
 {
-    public class DbConnector
+    class DbConnector
     {
     }
 }
