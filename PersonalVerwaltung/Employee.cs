@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,28 +16,78 @@ namespace PersonalVerwaltung
         public int Zipcode { get; set; }
         public string Email { get; set; }
         public int Departmentnr { get; set; }
-        public int Phonenumber { get; set; }
+        public string Phonenumber { get; set; }
         public string Maritalstatus { get; set; }
         public int Professionnr { get; set; }
         public DateTime Entrydate { get; set; }
-
-        public Employee(string firstname, string lastname, string street, int zipcode, string email, int departmentnr, int phonenumber, string maritalstatus, int professionnr, DateTime entrydate)
-        {
-            Firstname = firstname;
-            Lastname = lastname;
-            Street = street;
-            Zipcode = zipcode;
-            Email = email;
-            Departmentnr = departmentnr;
-            Phonenumber = phonenumber;
-            Maritalstatus = maritalstatus;
-            Professionnr = professionnr;
-            Entrydate = entrydate;
-        }
+        
 
         public bool createEmployee()
         {
-            return true;
+            DbConnector dbConnector = new DbConnector();
+            string query;
+
+            query = "INSERT INTO mitarbeiter (vorname, nachname, strasse, plz, familienstand, telefon, email, abteilungsnr, berufsnr, eintritt)" +
+                            "VALUES (@vor, @nach, @strasse, @plz, @fam, @tel, @email, @abt, @ber, @ein)";
+
+            MySqlCommand insert = new MySqlCommand(query, dbConnector.dbConn);
+            insert.Parameters.AddWithValue("@vor", this.Firstname);
+            insert.Parameters.AddWithValue("@nach", this.Lastname);
+            insert.Parameters.AddWithValue("@strasse", this.Street);
+            insert.Parameters.AddWithValue("@plz", this.Zipcode);
+            insert.Parameters.AddWithValue("@fam", this.Maritalstatus);
+            insert.Parameters.AddWithValue("@tel", this.Phonenumber);
+            insert.Parameters.AddWithValue("@email", this.Email);
+            insert.Parameters.AddWithValue("@abt", this.Departmentnr);
+            insert.Parameters.AddWithValue("@ber", this.Professionnr);
+            insert.Parameters.AddWithValue("@ein", this.Entrydate);
+
+            dbConnector.dbConn.Open();
+            int status = insert.ExecuteNonQuery();
+            dbConnector.dbConn.Close();
+
+            if (status > 0) //Insert erfolgreich
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+            
+        }
+
+        public bool deleteEmployee()
+        {
+            DbConnector dbConnector = new DbConnector();
+
+            if (dbConnector.dbConn != null)
+            {
+
+                string delete = "DELETE FROM mitarbeiter WHERE personalnr = @pnr";
+
+                MySqlCommand delete_cmd = new MySqlCommand(delete, dbConnector.dbConn);
+
+                delete_cmd.Parameters.AddWithValue("@pnr", this.Employeenr);
+
+                dbConnector.dbConn.Open();
+                int status = delete_cmd.ExecuteNonQuery();
+                dbConnector.dbConn.Close();
+
+                if (status > 0) //Delete erfolgreich
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

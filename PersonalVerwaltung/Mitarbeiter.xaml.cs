@@ -11,45 +11,80 @@ namespace PersonalVerwaltung
     /// </summary>
     public partial class Mitarbeiter : UserControl
     {
+        public CollectionView EmployeeView;
         public Mitarbeiter()
         {
             InitializeComponent();
-            List<User> items = new List<User>();
-            items.Add(new User() { Name = "John Doe", Age = 42 });
-            items.Add(new User() { Name = "Jane Doe", Age = 39 });
-            items.Add(new User() { Name = "Sammy Doe", Age = 13 });
-            items.Add(new User() { Name = "Donna Doe", Age = 13 });
-            lvUsers.ItemsSource = items;
 
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvUsers.ItemsSource);
-            view.Filter = UserFilter;
+            EmployeeView = (CollectionView)CollectionViewSource.GetDefaultView(mitarbeiter.ItemsSource);
+            EmployeeView.Filter = UserFilter;
         }
 
+        
         private bool UserFilter(object item)
         {
             if (String.IsNullOrEmpty(txtFilter.Text))
                 return true;
             else
-                return ((item as User).Name.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+                return ((item as Employee).Firstname.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
         private void txtFilter_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            CollectionViewSource.GetDefaultView(lvUsers.ItemsSource).Refresh();
+            CollectionViewSource.GetDefaultView(mitarbeiter.ItemsSource).Refresh();
         }
+        
+
         private void Btn_Add(object sender, RoutedEventArgs e)
         {
-            MaAdd maAddEdit = new MaAdd();
-            maAddEdit.Show();
+        
+            MaAdd maAdd = new MaAdd();
+            bool? dialogStatus = maAdd.ShowDialog();
+            if (dialogStatus == true)
+            {
+                //Refresh Mitarbeiter Liste
+                EmployeeList employeeList = (EmployeeList)this.TryFindResource("employeeList");
+                employeeList.Refresh();
+                EmployeeView.Refresh();
+                MessageBox.Show("Mitarbeiter erfolgreich gespeichert!");
+            }
         }
-        /*private void Btn_Remove(object sender, RoutedEventArgs e)
-		{
-		}*/
-        private void showEmployee(object sender, RoutedEventArgs e)
+        private void Btn_Remove(object sender, RoutedEventArgs e)
+        {
+            bool status = false;
+            MessageBoxResult result = MessageBox.Show("Soll der Mitarbeiter von der Datenbank entfernt werden?", "Mitarbeiter löschen", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    Employee employee = (Employee)mitarbeiter.SelectedItem;
+                    status = employee.deleteEmployee();
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+
+            if (status == true)
+            {
+                //Refresh Mitarbeiter Liste
+                EmployeeList employeeList = (EmployeeList)this.TryFindResource("employeeList");
+                employeeList.Refresh();
+                EmployeeView.Refresh();
+
+                MessageBox.Show("Mitarbeiter erfolgreich entfernt!");
+            }
+
+        }
+
+        private void Btn_Show(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void showEmployee(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             MAanzeige maAnzeige = new MAanzeige();
             maAnzeige.Show();
         }
+
         private void ToolBar_Loaded(object sender, RoutedEventArgs e)
         {
             ToolBar toolBar = sender as ToolBar;
@@ -64,19 +99,7 @@ namespace PersonalVerwaltung
                 mainPanelBorder.Margin = new Thickness();
             }
         }
-    }
 
-    public enum SexType { Male, Female };
-
-    public class User
-    {
-        public string Name { get; set; }
-
-        public int Age { get; set; }
-
-        public string Mail { get; set; }
-
-        public SexType Sex { get; set; }
     }
 }
 

@@ -15,10 +15,10 @@
         <StackPanel Margin="20">
             <Label Content="PersoVi" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
             <Separator></Separator>
-            <Label Content="Benutzername" Foreground="White"/>
-            <TextBox Name="txtUsername" Background="#545d6a" Foreground="White" FontSize="18"/>
-            <Label Content="Passwort" Foreground="White"/>
-            <PasswordBox Name="txtPassword" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <Label Content="Benutzername:" Foreground="White"/>
+            <TextBox Name="txtUsername" Background="#545d6a" Foreground="White" FontSize="18" KeyDown="onKeyDownHandler"/>
+            <Label Content="Passwort:" Foreground="White"/>
+            <PasswordBox Name="txtPassword" Background="#545d6a" Foreground="White" FontSize="18" KeyDown="onKeyDownHandler"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
                 <Button x:Name="btn_submit" Click="btn_submitClick" Content="Login" Background="#545d6a" Foreground="White" FontSize="18" Width="100" />
                 <Button x:Name="btn_shutdown" Click="btn_shutdown_Click" Content="Abbrechen" Background="#545d6a" Foreground="White" FontSize="18" Width="100" Margin="10,0,0,0"/>

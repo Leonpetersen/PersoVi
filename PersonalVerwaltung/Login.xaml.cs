@@ -25,9 +25,17 @@ namespace PersonalVerwaltung
         }
         private void btn_submitClick(object sender, RoutedEventArgs e)
         {
-            MainWindow dashboard = new MainWindow();
-            dashboard.Show();
-            this.Close();
+            if (LoginHandler.checkCredentials(txtUsername.Text, txtPassword.Password) == true)
+            {
+                MainWindow dashboard = new MainWindow();
+                dashboard.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Benutzername oder Passwort falsch eingegeben!");
+            }
+         
         }
 
         private void btn_shutdown_Click(object sender, RoutedEventArgs e)
@@ -38,6 +46,23 @@ namespace PersonalVerwaltung
         {
             base.OnMouseLeftButtonDown(e);
             this.DragMove();
+        }
+
+        private void onKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (LoginHandler.checkCredentials(txtUsername.Text, txtPassword.Password) == true)
+                {
+                    MainWindow dashboard = new MainWindow();
+                    dashboard.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Benutzername oder Passwort falsch eingegeben!");
+                }
+            }
         }
     }
 }

@@ -10,6 +10,7 @@
         Background="Transparent"
         WindowStyle="None"
         MouseMove="onMouseMove"
+        WindowStartupLocation="CenterScreen"
         AllowsTransparency="True">
     <Window.Resources>
         <Style TargetType="Label">
@@ -21,6 +22,9 @@
         <Style TargetType="ComboBox">
             <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
+        <local:OrtList x:Key="ortList"/>
+        <local:AbteilungList x:Key="abteilungList"/>
+        <local:BerufList x:Key="berufList"/>
     </Window.Resources>
 
     <Border Background="#272537" CornerRadius="20">
@@ -36,7 +40,7 @@
                 <Label Content="Ort:" Margin="80,0,0,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <ComboBox x:Name="combo_plz" Width="80"/>
+                <ComboBox x:Name="combo_plz" ItemsSource="{StaticResource ortList}" DisplayMemberPath="LandPlz" Width="80" SelectionChanged="onSelectionChangedPlz"/>
                 <TextBox x:Name="ort" Margin="15,0,0,0" Width="150"/>
             </StackPanel>
             <Label Content="Familienstand:"/>
@@ -46,9 +50,9 @@
             <Label Content="Telefon:"/>
             <TextBox x:Name="telefon" Width="100" HorizontalAlignment="Left"/>
             <Label Content="Abteilung:"/>
-            <ComboBox x:Name="combo_abt" Width="150" HorizontalAlignment="Left"/>
+            <ComboBox x:Name="combo_abt" ItemsSource="{StaticResource abteilungList}" DisplayMemberPath="Bezeichnung" Width="150" HorizontalAlignment="Left"/>
             <Label Content="Beruf:"/>
-            <ComboBox x:Name="combo_beruf" Width="150" HorizontalAlignment="Left"/>
+            <ComboBox x:Name="combo_beruf" ItemsSource="{StaticResource berufList}" DisplayMemberPath="Bezeichnung" Width="150" HorizontalAlignment="Left"/>
             <Label Content="Eintrittsdatum:"/>
             <DatePicker Name="eintritt" Width="150" HorizontalAlignment="Left" SelectedDate="{x:Static sys:DateTime.Now}"/>
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
@@ -63,7 +67,6 @@
                     </TextBlock>
                 </Button>
             </StackPanel>
-
         </StackPanel>
     </Border>
 </Window>

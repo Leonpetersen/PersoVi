@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,20 +21,95 @@ namespace PersonalVerwaltung
     /// </summary>
     public partial class MaAdd : Window
     {
+        public DbConnector dbConnector = new DbConnector();
+        public ObservableCollection<string> familienstand = new ObservableCollection<string>();
         public MaAdd()
         {
             InitializeComponent();
             ort.IsReadOnly = true;
             ort.Background = Brushes.LavenderBlush;
+            familienstand.Add("Ledig");
+            familienstand.Add("Verheiratet");
+            familienstand.Add("Verwitwet");
+            familienstand.Add("Geschieden");
+            familienstand.Add("Nicht bekannt");
+            combo_marital.ItemsSource = familienstand;
         }
 
         private void saveEmployeeData(object sender, RoutedEventArgs e)
         {
-            //Popup to confirm database insert
+            //Werte prüfen
+            if (vorname.Text == "")
+            {
+                MessageBox.Show("Feld \"Vorname\" darf nicht leer sein!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
+            else if (nachname.Text == "")
+            {
+                MessageBox.Show("Feld \"Nachname\" darf nicht leer sein!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
+            else if (strasse.Text == "")
+            {
+                MessageBox.Show("Feld \"Straße & Hausnummer\" darf nicht leer sein!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
+            else if (combo_plz.SelectedValue == null)
+            {
+                MessageBox.Show("Bitte einen Ort auswählen", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
+            else if (email.Text == "")
+            {
+                MessageBox.Show("Feld \"E-Mail\" darf nicht leer sein!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
+            else if (combo_abt.SelectedValue == null)
+            {
+                MessageBox.Show("Bitte eine Abteilung auswählen!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
+            else if (combo_beruf.SelectedValue == null)
+            {
+                MessageBox.Show("Bitte eine Berufung auswählen!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
+            else
+            {
 
-            //Insert
-            Employee employee = new Employee(vorname.Text, nachname.Text, strasse.Text, (int)combo_plz.SelectedItem, email.Text, (int)combo_abt.SelectedItem, int.Parse(telefon.Text), combo_marital.SelectedItem.ToString(), int.Parse(combo_beruf.SelectedItem.ToString()), eintritt.SelectedDate.Value);
-            employee.createEmployee();
+                //Popup um Datenbankinsert zu akzeptieren
+                MessageBoxResult result = MessageBox.Show("Mitarbeiter anlegen?", "Mitarbeiter anlegen", MessageBoxButton.YesNo);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        //Datenbankinsert
+                        Ort ort = (Ort)combo_plz.SelectedItem;
+                        Abteilung abteilung = (Abteilung)combo_abt.SelectedItem;
+                        Beruf beruf = (Beruf)combo_beruf.SelectedItem;
+
+                        Employee employee = new Employee()
+                        {
+                            Firstname = vorname.Text,
+                            Lastname = nachname.Text,
+                            Street = strasse.Text,
+                            Zipcode = ort.Plz,
+                            Maritalstatus = combo_marital.SelectedItem.ToString(),
+                            Phonenumber = telefon.Text,
+                            Email = email.Text,
+                            Departmentnr = abteilung.Abteilungsnr,
+                            Professionnr = beruf.Berufsnummer,
+                            Entrydate = eintritt.SelectedDate.Value
+                        };
+
+                        if (employee.createEmployee() == true)
+                        {
+                            this.DialogResult = true;
+                            this.Close();
+                        }
+                        else
+                        {
+                            this.DialogResult = false;
+                            this.Close();
+                        }
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+
         }
 
         private void closeWindow(object sender, RoutedEventArgs e)
@@ -45,6 +122,16 @@ namespace PersonalVerwaltung
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.DragMove();
+            }
+        }
+
+        private void onSelectionChangedPlz(object sender, SelectionChangedEventArgs e)
+        {
+            Ort ort_obj = new Ort();
+            ort_obj = (Ort)combo_plz.SelectedItem;
+            if (ort_obj != null)
+            {
+                ort.Text = (string)ort_obj.Ortsname;
             }
         }
     }

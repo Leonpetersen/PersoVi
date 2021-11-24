@@ -35,9 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=8.0.20.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,6 +64,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Abteilung.cs" />
+    <Compile Include="AbteilungList.cs" />
+    <Compile Include="Beruf.cs" />
+    <Compile Include="BerufList.cs" />
     <Compile Include="DbConnector.cs" />
     <Compile Include="Einstellungen.xaml.cs">
       <DependentUpon>Einstellungen.xaml</DependentUpon>
@@ -65,6 +77,7 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LoginHandler.cs" />
     <Compile Include="Lohnabrechnung.xaml.cs">
       <DependentUpon>Lohnabrechnung.xaml</DependentUpon>
     </Compile>
@@ -77,6 +90,8 @@
     <Compile Include="Mitarbeiter.xaml.cs">
       <DependentUpon>Mitarbeiter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ort.cs" />
+    <Compile Include="OrtList.cs" />
     <Compile Include="PersoEdit.xaml.cs">
       <DependentUpon>PersoEdit.xaml</DependentUpon>
     </Compile>
