@@ -63,11 +63,10 @@ namespace PersonalVerwaltung
         }
         private void minimize(object sender, RoutedEventArgs e)
         {
-
+            WindowState = WindowState.Minimized;
         }
         private void smaller(object sender, RoutedEventArgs e)
         {
-
         }
         private void shutdown(object sender, RoutedEventArgs e)
         {

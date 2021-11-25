@@ -8,9 +8,9 @@
         MinHeight="700" MinWidth="1250"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterScreen"
         Background="Transparent"
         AllowsTransparency="True">
-
     <Border Background="#272537"
             CornerRadius="20">
         <Grid x:Name="main">
@@ -24,13 +24,13 @@
             </Grid.RowDefinitions>
             <Grid x:Name="grid1" Grid.Column="2" Grid.Row="2"/>
             <StackPanel Orientation="Horizontal">
-                <Image Source="C:\Users\Ilja\source\repos\PersonalVerwaltung\PersonalVerwaltung\Images\verwaltung.png" Margin="5"/>
+                <Image Source="Images\verwaltung.png" Margin="5"/>
                 <TextBlock Margin="20" Text="PersoVi" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Margin="20">
                 <Button x:Name="btn_personalplanung" Click="personalplanung" Margin="10" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="C:\Users\Ilja\source\repos\PersonalVerwaltung\PersonalVerwaltung\Images\kalender.png"
+                        <Image Source="Images\kalender.png"
                            Height="45"/>
                         <TextBlock VerticalAlignment="Center" Margin="5">
                             Personalplanung
@@ -39,7 +39,7 @@
                 </Button>
                 <Button x:Name="btn_mitarbeiter" Click="mitarbeiter" Margin="10" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="C:\Users\Ilja\source\repos\PersonalVerwaltung\PersonalVerwaltung\Images\nutzer.png"
+                        <Image Source="Images\nutzer.png"
                            Height="45"/>
                         <TextBlock VerticalAlignment="Center" Margin="5">
                             Mitarbeiter
@@ -48,7 +48,7 @@
                 </Button>
                 <Button x:Name="btn_studenerfassung" Click="stundenerfassung" Margin="10" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="C:\Users\Ilja\source\repos\PersonalVerwaltung\PersonalVerwaltung\Images\uhr.png"
+                        <Image Source="Images\uhr.png"
                            Height="45"/>
                         <TextBlock VerticalAlignment="Center" Margin="5">
                             Stundenerfassung
@@ -57,7 +57,7 @@
                 </Button>
                 <Button x:Name="btn_lohnabrechnung" Click="lohnabrechnung" Margin="10" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="C:\Users\Ilja\source\repos\PersonalVerwaltung\PersonalVerwaltung\Images\geld-bekommen.png"
+                        <Image Source="Images\geld-bekommen.png"
                            Height="45"/>
                         <TextBlock VerticalAlignment="Center" Margin="5">
                             Lohnabrechnung
@@ -66,7 +66,7 @@
                 </Button>
                 <Button x:Name="btn_einstellung" Click="einstellungen" Margin="10" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="C:\Users\Ilja\source\repos\PersonalVerwaltung\PersonalVerwaltung\Images\die-einstellungen.png"
+                        <Image Source="Images\die-einstellungen.png"
                            Height="45"/>
                         <TextBlock VerticalAlignment="Center" Margin="5">
                             Einstellungen

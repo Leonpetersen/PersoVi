@@ -9,6 +9,7 @@
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
         Background="Transparent"
+        MouseMove="onMouseMove"
         AllowsTransparency="True">
 
     <Border Background="#272537"

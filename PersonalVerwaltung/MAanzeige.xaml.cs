@@ -37,5 +37,13 @@ namespace PersonalVerwaltung
                 mainPanelBorder.Margin = new Thickness();
             }
         }
+
+        private void onMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
     }
 }
