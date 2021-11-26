@@ -3,54 +3,75 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:PersonalVerwaltung"
         mc:Ignorable="d"
-        Title="MAanzeige" Height="450" Width="800"
+        Title="MAanzeige" Height="550" Width="400"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
         Background="Transparent"
         MouseMove="onMouseMove"
         AllowsTransparency="True">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <local:OrtList x:Key="ortList"/>
+        <local:AbteilungList x:Key="abteilungList"/>
+        <local:BerufList x:Key="berufList"/>
+        <local:FamilienstandList x:Key="familienstandList"/>
+    </Window.Resources>
 
-    <Border Background="#272537"
-        CornerRadius="20">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <TextBlock Text="Personalnummer:" Foreground="White" Margin="10" Grid.Row="0"/>
-            <TextBlock Text="Name:" Foreground="White" Margin="10" Grid.Row="1"/>
-            <TextBlock Text="Vorname:" Foreground="White" Margin="10" Grid.Row="2"/>
-            <TextBlock Text="Geburtsdatum:" Foreground="White" Margin="10" Grid.Row="3"/>
-            <TextBlock Text="Adresse:" Foreground="White" Margin="10" Grid.Row="4"/>
-            <TextBox Grid.Row="0" Height="20" Margin="10" VerticalAlignment="Bottom"/>
-            <TextBox Grid.Row="1" Height="20" Margin="10" VerticalAlignment="Bottom"/>
-            <TextBox Grid.Row="2" Height="20" Margin="10" VerticalAlignment="Bottom"/>
-            <TextBox Grid.Row="3" Height="20" Margin="10" VerticalAlignment="Bottom"/>
-            <TextBox Grid.Row="4" Height="20" Margin="10" VerticalAlignment="Bottom"/>
-            <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
-                <ToolBarTray Grid.Row="1" Background="Transparent">
-                    <ToolBar Background="Transparent" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
-                        <Menu Background="Transparent" ToolBar.OverflowMode="Never">
-                            <Button Background="Transparent" Width="50">
-                                <TextBlock Foreground="White" FontSize="20">✏️</TextBlock>
-                            </Button>
-                            <Button Background="Transparent" Width="50">
-                                <TextBlock Foreground="White" FontSize="20">🗑️</TextBlock>
-                            </Button>
-                            <Button Background="Transparent" Width="50">
-                                <TextBlock Foreground="White" FontSize="20"> ❌</TextBlock>
-                            </Button>
-                        </Menu>
-                    </ToolBar>
-                </ToolBarTray>
+    <Border Background="#272537" CornerRadius="20" BorderBrush="#37344e" BorderThickness="2">
+        <StackPanel HorizontalAlignment="Center" Margin="10">
+        <Label Content="Vorname:" />
+        <TextBox x:Name="vorname" Width="100" HorizontalAlignment="Left"/>
+        <Label Content="Nachname:"/>
+        <TextBox x:Name="nachname" Width="100" HorizontalAlignment="Left"/>
+        <Label Content="Straße &amp; Hausnummer:"/>
+        <TextBox x:Name="strasse" Width="100" HorizontalAlignment="Left"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Plz:"/>
+            <Label Content="Ort:" Margin="80,0,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <ComboBox x:Name="combo_plz" ItemsSource="{StaticResource ortList}" DisplayMemberPath="LandPlz" Width="80" SelectionChanged="onSelectionChangedPlz" SelectedValuePath="Plz"/>
+            <TextBox x:Name="ort" Margin="15,0,0,0" Width="150"/>
+        </StackPanel>
+        <Label Content="Familienstand:"/>
+        <ComboBox x:Name="combo_marital" ItemsSource="{StaticResource familienstandList}" DisplayMemberPath="Stand" Width="150" HorizontalAlignment="Left" SelectedValuePath="Stand"/>
+        <Label Content="E-Mail:"/>
+        <TextBox x:Name="email" Width="100" HorizontalAlignment="Left"/>
+        <Label Content="Telefon:"/>
+        <TextBox x:Name="telefon" Width="100" HorizontalAlignment="Left"/>
+        <Label Content="Abteilung:"/>
+        <ComboBox x:Name="combo_abt" ItemsSource="{StaticResource abteilungList}" DisplayMemberPath="Bezeichnung" Width="150" HorizontalAlignment="Left" SelectedValuePath="Abteilungsnr"/>
+        <Label Content="Beruf:"/>
+        <ComboBox x:Name="combo_beruf" ItemsSource="{StaticResource berufList}" DisplayMemberPath="Bezeichnung" Width="150" HorizontalAlignment="Left" SelectedValuePath="Berufsnummer"/>
+        <Label Content="Eintrittsdatum:"/>
+        <DatePicker Name="eintritt" Width="150" HorizontalAlignment="Left" SelectedDate="{x:Static sys:DateTime.Now}"/>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <Button Background="Transparent" Width="50" Click="changeEditMode">
+                            <TextBlock Foreground="White" FontSize="20">✏️</TextBlock>
+                        </Button>
+                <Button Background="Transparent" Click="saveChanges">
+                    <TextBlock FontSize="20">
+                 💾
+                    </TextBlock>
+                </Button>
+                <Button Background="Transparent" Width="50" Click="deleteEmployee">
+                            <TextBlock Foreground="White" FontSize="20">🗑️</TextBlock>
+                        </Button>
+                <Button Background="Transparent" Width="50" Click="closeWindow">
+                    <TextBlock Foreground="White" FontSize="20"> ❌</TextBlock>
+                </Button>
             </StackPanel>
-        </Grid>
+        </StackPanel>
     </Border>
 </Window>

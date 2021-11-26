@@ -74,6 +74,8 @@
     </Compile>
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeList.cs" />
+    <Compile Include="Familienstand.cs" />
+    <Compile Include="FamilienstandList.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>

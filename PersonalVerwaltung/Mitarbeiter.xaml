@@ -36,10 +36,10 @@
         <ListView Name="mitarbeiter" Grid.Row="2" ItemsSource="{StaticResource employeeList}" Margin="10" Background="Transparent" BorderBrush="Transparent" Foreground="White" MouseDoubleClick="showEmployee" SelectionMode="Single">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Personalnummer" Width="200" DisplayMemberBinding="{Binding Employeenr}" />
+                    <GridViewColumn Header="Personalnummer" Width="200"  DisplayMemberBinding="{Binding Employeenr}" />
                     <GridViewColumn Header="Vorname" Width="150" DisplayMemberBinding="{Binding Firstname}" />
                     <GridViewColumn Header="Nachname" Width="200" DisplayMemberBinding="{Binding Lastname}" />
-                    <GridViewColumn Header="Abteilung" Width="150" DisplayMemberBinding="{Binding Departmentnr}" />
+                    <GridViewColumn Header="Abteilung" Width="150" DisplayMemberBinding="{Binding Department}" />
                 </GridView>
             </ListView.View>
         </ListView>

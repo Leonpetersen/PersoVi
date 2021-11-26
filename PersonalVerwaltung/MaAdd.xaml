@@ -25,6 +25,7 @@
         <local:OrtList x:Key="ortList"/>
         <local:AbteilungList x:Key="abteilungList"/>
         <local:BerufList x:Key="berufList"/>
+        <local:FamilienstandList x:Key="familienstandList"/>
     </Window.Resources>
 
     <Border Background="#272537" CornerRadius="20" BorderBrush="#37344e" BorderThickness="2">
@@ -44,7 +45,7 @@
                 <TextBox x:Name="ort" Margin="15,0,0,0" Width="150"/>
             </StackPanel>
             <Label Content="Familienstand:"/>
-            <ComboBox x:Name="combo_marital" Width="150" HorizontalAlignment="Left"/>
+            <ComboBox x:Name="combo_marital" ItemsSource="{StaticResource familienstandList}" DisplayMemberPath="Stand" Width="150" HorizontalAlignment="Left"/>
             <Label Content="E-Mail:"/>
             <TextBox x:Name="email" Width="100" HorizontalAlignment="Left"/>
             <Label Content="Telefon:"/>

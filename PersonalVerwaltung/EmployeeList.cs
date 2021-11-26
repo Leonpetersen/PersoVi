@@ -25,7 +25,7 @@ namespace PersonalVerwaltung
             if (dbConnector.dbConn != null)
             {
                 this.Clear();
-                query = "SELECT * FROM mitarbeiter";
+                query = "SELECT * FROM mitarbeiter INNER JOIN orte ON mitarbeiter.plz = orte.plz INNER JOIN abteilungen ON mitarbeiter.abteilungsnr = abteilungen.abteilungsnr";
                 query_cmd.CommandText = query;
 
                 dbConnector.dbConn.Open();
@@ -41,10 +41,12 @@ namespace PersonalVerwaltung
                         Lastname = (string)reader["nachname"],
                         Street = (string)reader["strasse"],
                         Zipcode = (int)reader["plz"],
+                        Country = (string)reader["land"],
                         Maritalstatus = (string)reader["familienstand"],
                         Phonenumber = (string)reader["telefon"],
                         Email = (string)reader["email"],
                         Departmentnr = (int)reader["abteilungsnr"],
+                        Department = (string)reader["bezeichnung"],
                         Professionnr = (int)reader["berufsnr"],
                         Entrydate = (DateTime)reader["eintritt"]
                     };

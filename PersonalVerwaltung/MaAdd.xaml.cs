@@ -22,18 +22,11 @@ namespace PersonalVerwaltung
     public partial class MaAdd : Window
     {
         public DbConnector dbConnector = new DbConnector();
-        public ObservableCollection<string> familienstand = new ObservableCollection<string>();
         public MaAdd()
         {
             InitializeComponent();
             ort.IsReadOnly = true;
             ort.Background = Brushes.LavenderBlush;
-            familienstand.Add("Ledig");
-            familienstand.Add("Verheiratet");
-            familienstand.Add("Verwitwet");
-            familienstand.Add("Geschieden");
-            familienstand.Add("Nicht bekannt");
-            combo_marital.ItemsSource = familienstand;
         }
 
         private void saveEmployeeData(object sender, RoutedEventArgs e)

@@ -14,8 +14,10 @@ namespace PersonalVerwaltung
         public string Lastname { get; set; }
         public string Street { get; set; }
         public int Zipcode { get; set; }
+        public string Country { get; set; }
         public string Email { get; set; }
         public int Departmentnr { get; set; }
+        public string Department { get; set; }
         public string Phonenumber { get; set; }
         public string Maritalstatus { get; set; }
         public int Professionnr { get; set; }
@@ -88,6 +90,41 @@ namespace PersonalVerwaltung
             {
                 return false;
             }
+        }
+
+        public bool updateEmployee()
+        {
+            DbConnector dbConnector = new DbConnector();
+            
+            string update = "UPDATE mitarbeiter SET vorname = @vor, nachname = @nach, strasse = @strasse, plz = @plz, " +
+                    "familienstand = @fam, telefon = @tel, email = @email, abteilungsnr = @abt, berufsnr = @ber, eintritt = @ein WHERE personalnr = @pnr";
+
+            MySqlCommand upd_cmd = new MySqlCommand(update, dbConnector.dbConn);
+
+            upd_cmd.Parameters.AddWithValue("@vor", this.Firstname);
+            upd_cmd.Parameters.AddWithValue("@nach", this.Lastname);
+            upd_cmd.Parameters.AddWithValue("@strasse", this.Street);
+            upd_cmd.Parameters.AddWithValue("@plz", this.Zipcode);
+            upd_cmd.Parameters.AddWithValue("@fam", this.Maritalstatus);
+            upd_cmd.Parameters.AddWithValue("@tel", this.Phonenumber);
+            upd_cmd.Parameters.AddWithValue("@email", this.Email);
+            upd_cmd.Parameters.AddWithValue("@abt", this.Departmentnr);
+            upd_cmd.Parameters.AddWithValue("@ber", this.Professionnr);
+            upd_cmd.Parameters.AddWithValue("@ein", this.Entrydate);
+
+            dbConnector.dbConn.Open();
+            int status = upd_cmd.ExecuteNonQuery();
+            dbConnector.dbConn.Close();
+
+            if (status > 0) //Update erfolgreich
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }

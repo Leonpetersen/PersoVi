@@ -20,7 +20,7 @@ namespace PersonalVerwaltung
             EmployeeView.Filter = UserFilter;
         }
 
-        
+
         private bool UserFilter(object item)
         {
             if (String.IsNullOrEmpty(txtFilter.Text))
@@ -33,11 +33,11 @@ namespace PersonalVerwaltung
         {
             CollectionViewSource.GetDefaultView(mitarbeiter.ItemsSource).Refresh();
         }
-        
+
 
         private void Btn_Add(object sender, RoutedEventArgs e)
         {
-        
+
             MaAdd maAdd = new MaAdd();
             bool? dialogStatus = maAdd.ShowDialog();
             if (dialogStatus == true)
@@ -74,15 +74,29 @@ namespace PersonalVerwaltung
             }
 
         }
-
         private void Btn_Show(object sender, RoutedEventArgs e)
         {
-
+            MAanzeige maAnzeige = new MAanzeige((Employee)mitarbeiter.SelectedItem);
+            bool? dialogStatus = maAnzeige.ShowDialog();
+            if (dialogStatus == true)
+            {
+                //Refresh Mitarbeiter Liste
+                EmployeeList employeeList = (EmployeeList)this.TryFindResource("employeeList");
+                employeeList.Refresh();
+                EmployeeView.Refresh();
+            }
         }
         private void showEmployee(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            MAanzeige maAnzeige = new MAanzeige();
-            maAnzeige.Show();
+            MAanzeige maAnzeige = new MAanzeige((Employee)mitarbeiter.SelectedItem);
+            bool? dialogStatus = maAnzeige.ShowDialog();
+            if (dialogStatus == true)
+            {
+                //Refresh Mitarbeiter Liste
+                EmployeeList employeeList = (EmployeeList)this.TryFindResource("employeeList");
+                employeeList.Refresh();
+                EmployeeView.Refresh();
+            }
         }
 
         private void ToolBar_Loaded(object sender, RoutedEventArgs e)
@@ -99,6 +113,7 @@ namespace PersonalVerwaltung
                 mainPanelBorder.Margin = new Thickness();
             }
         }
+
 
     }
 }
