@@ -10,7 +10,7 @@ namespace PersonalVerwaltung
 {
     public static class LoginHandler
     {
-        
+
         public static bool checkCredentials(string user, string pw)
         {
             DbConnector dbConnector = new DbConnector();
@@ -32,7 +32,7 @@ namespace PersonalVerwaltung
 
             dbConnector.dbConn.Open();
             int i = (int)(long)count_cmd.ExecuteScalar();
-            
+
             dbConnector.dbConn.Close();
 
             if (i > 0)
@@ -43,7 +43,7 @@ namespace PersonalVerwaltung
             {
                 return false;
             }
-            
+
         }
     }
 }

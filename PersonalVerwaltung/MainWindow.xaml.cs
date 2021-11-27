@@ -20,12 +20,13 @@ namespace PersonalVerwaltung
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(string username)
         {
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
             Personalplanung usercontrol = new Personalplanung();
             grid1.Children.Add(usercontrol);
+            user.Text = "Benutzer: " + username;
         }
         private void mitarbeiter(object sender, RoutedEventArgs e)
         {
@@ -59,7 +60,20 @@ namespace PersonalVerwaltung
         }
         private void Logout (object sender,RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Abmelden?", "Abmelden", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    Login login = new Login();
+                    login.Show();
+                    this.Close();
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
 
+
+ 
         }
         private void minimize(object sender, RoutedEventArgs e)
         {

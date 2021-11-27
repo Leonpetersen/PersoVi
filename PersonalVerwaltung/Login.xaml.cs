@@ -27,7 +27,7 @@ namespace PersonalVerwaltung
         {
             if (LoginHandler.checkCredentials(txtUsername.Text, txtPassword.Password) == true)
             {
-                MainWindow dashboard = new MainWindow();
+                MainWindow dashboard = new MainWindow(txtUsername.Text);
                 dashboard.Show();
                 this.Close();
             }
@@ -54,7 +54,7 @@ namespace PersonalVerwaltung
             {
                 if (LoginHandler.checkCredentials(txtUsername.Text, txtPassword.Password) == true)
                 {
-                    MainWindow dashboard = new MainWindow();
+                    MainWindow dashboard = new MainWindow(txtUsername.Text);
                     dashboard.Show();
                     this.Close();
                 }

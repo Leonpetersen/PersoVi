@@ -23,15 +23,48 @@ namespace PersonalVerwaltung
 
         private bool UserFilter(object item)
         {
+            bool entryExists;
+
             if (String.IsNullOrEmpty(txtFilter.Text))
-                return true;
+            {
+                //return true;
+                entryExists = true;
+            }
             else
-                return ((item as Employee).Firstname.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            {
+                //Prüfe Personalnummer
+                if (((item as Employee).Employeenr.ToString().IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    entryExists = true;
+                }
+                //Prüfe Vorname
+                else if (((item as Employee).Firstname.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    entryExists = true;
+                }
+                //Prüfe Nachname
+                else if (((item as Employee).Lastname.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    entryExists = true;
+                }
+                //Prüfe Abteilung
+                else if (((item as Employee).Department.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    entryExists = true;
+                }
+                else
+                {
+                    entryExists = false;
+                }
+                
+            }
+            return entryExists;
+                
         }
 
         private void txtFilter_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            CollectionViewSource.GetDefaultView(mitarbeiter.ItemsSource).Refresh();
+            EmployeeView.Refresh();
         }
 
 
