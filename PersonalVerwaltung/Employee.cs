@@ -111,6 +111,7 @@ namespace PersonalVerwaltung
             upd_cmd.Parameters.AddWithValue("@abt", this.Departmentnr);
             upd_cmd.Parameters.AddWithValue("@ber", this.Professionnr);
             upd_cmd.Parameters.AddWithValue("@ein", this.Entrydate);
+            upd_cmd.Parameters.AddWithValue("@pnr", this.Employeenr);
 
             dbConnector.dbConn.Open();
             int status = upd_cmd.ExecuteNonQuery();

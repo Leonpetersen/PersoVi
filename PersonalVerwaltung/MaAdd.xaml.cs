@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,13 +37,25 @@ namespace PersonalVerwaltung
             {
                 MessageBox.Show("Feld \"Vorname\" darf nicht leer sein!", "Eingaben prüfen!", MessageBoxButton.OK);
             }
+            else if (Regex.IsMatch(vorname.Text, @"^[a-zA-ZäüöÄÜÖ]+$") == false)
+            {
+                MessageBox.Show("Feld \"Vorname\" darf nur Buchstaben enthalten!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
             else if (nachname.Text == "")
             {
                 MessageBox.Show("Feld \"Nachname\" darf nicht leer sein!", "Eingaben prüfen!", MessageBoxButton.OK);
             }
+            else if (Regex.IsMatch(nachname.Text, @"^[a-zA-ZäüöÄÜÖ]+$") == false)
+            {
+                MessageBox.Show("Feld \"Nachname\" darf nur Buchstaben enthalten!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
             else if (strasse.Text == "")
             {
                 MessageBox.Show("Feld \"Straße & Hausnummer\" darf nicht leer sein!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
+            else if (Regex.IsMatch(strasse.Text, @"^[0-9]+$") == true)
+            {
+                MessageBox.Show("Feld \"Straße & Hausnummer\" darf nicht nur Zahlen enthalten!", "Eingaben prüfen!", MessageBoxButton.OK);
             }
             else if (combo_plz.SelectedValue == null)
             {
@@ -51,6 +64,14 @@ namespace PersonalVerwaltung
             else if (email.Text == "")
             {
                 MessageBox.Show("Feld \"E-Mail\" darf nicht leer sein!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
+            else if (Hilfsmittel.isValidEmail(email.Text) == false)
+            {
+                MessageBox.Show("Feld \"Email\" überprüfen!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
+            else if ((Regex.IsMatch(telefon.Text, @"^[0-9]+$") == false) && telefon.Text != "") 
+            {
+                MessageBox.Show("Feld \"Telefon\" darf nur Zahlen enthalten!", "Eingaben prüfen!", MessageBoxButton.OK);
             }
             else if (combo_abt.SelectedValue == null)
             {

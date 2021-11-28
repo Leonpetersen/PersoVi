@@ -72,8 +72,6 @@ namespace PersonalVerwaltung
                     break;
             }
 
-
- 
         }
         private void minimize(object sender, RoutedEventArgs e)
         {

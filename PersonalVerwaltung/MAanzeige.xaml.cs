@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -101,7 +102,7 @@ namespace PersonalVerwaltung
         private void deleteEmployee(object sender, RoutedEventArgs e)
         {
             bool status = false;
-            MessageBoxResult result = MessageBox.Show("Soll der Mitarbeiter von der Datenbank entfernt werden?", "Mitarbeiter löschen", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Soll der/die Mitarbeiter/-in von der Datenbank entfernt werden?", "Mitarbeiter/-in löschen", MessageBoxButton.YesNo);
             switch (result)
             {
                 case MessageBoxResult.Yes:
@@ -113,7 +114,7 @@ namespace PersonalVerwaltung
 
             if (status == true)
             {
-                MessageBox.Show("Mitarbeiter erfolgreich entfernt!");
+                MessageBox.Show("Mitarbeiter/-in erfolgreich entfernt!");
                 this.DialogResult = true;
                 this.Close();
             }
@@ -172,13 +173,25 @@ namespace PersonalVerwaltung
             {
                 MessageBox.Show("Feld \"Vorname\" darf nicht leer sein!", "Eingaben prüfen!", MessageBoxButton.OK);
             }
+            else if (Regex.IsMatch(vorname.Text, @"^[a-zA-ZäüöÄÜÖ]+$") == false)
+            {
+                MessageBox.Show("Feld \"Vorname\" darf nur Buchstaben enthalten!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
             else if (nachname.Text == "")
             {
                 MessageBox.Show("Feld \"Nachname\" darf nicht leer sein!", "Eingaben prüfen!", MessageBoxButton.OK);
             }
+            else if (Regex.IsMatch(nachname.Text, @"^[a-zA-ZäüöÄÜÖ]+$") == false)
+            {
+                MessageBox.Show("Feld \"Nachname\" darf nur Buchstaben enthalten!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
             else if (strasse.Text == "")
             {
                 MessageBox.Show("Feld \"Straße & Hausnummer\" darf nicht leer sein!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
+            else if (Regex.IsMatch(strasse.Text, @"^[0-9]+$") == true)
+            {
+                MessageBox.Show("Feld \"Straße & Hausnummer\" darf nicht nur Zahlen enthalten!", "Eingaben prüfen!", MessageBoxButton.OK);
             }
             else if (combo_plz.SelectedValue == null)
             {
@@ -187,6 +200,14 @@ namespace PersonalVerwaltung
             else if (email.Text == "")
             {
                 MessageBox.Show("Feld \"E-Mail\" darf nicht leer sein!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
+            else if (Hilfsmittel.isValidEmail(email.Text) == false)
+            {
+                MessageBox.Show("Feld \"Email\" überprüfen!", "Eingaben prüfen!", MessageBoxButton.OK);
+            }
+            else if ((Regex.IsMatch(telefon.Text, @"^[0-9]+$") == false) && telefon.Text != "")
+            {
+                MessageBox.Show("Feld \"Telefon\" darf nur Zahlen enthalten!", "Eingaben prüfen!", MessageBoxButton.OK);
             }
             else if (combo_abt.SelectedValue == null)
             {
@@ -200,12 +221,13 @@ namespace PersonalVerwaltung
             {
                 //Popup um Datenbankinsert zu akzeptieren
                 bool status = false;
-                MessageBoxResult result = MessageBox.Show("Mitarbeiterdaten ändern?", "Mitarbeiter ändern", MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBox.Show("Mitarbeiter/-in ändern?", "Mitarbeiter/-in ändern", MessageBoxButton.YesNo);
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
                         Employee employeeChanged = new Employee()
                         {
+                            Employeenr = employee.Employeenr,
                             Firstname = vorname.Text,
                             Lastname = nachname.Text,
                             Street = strasse.Text,
@@ -219,17 +241,24 @@ namespace PersonalVerwaltung
 
                         };
                         status = employeeChanged.updateEmployee();
+
+                        if (status == true)
+                        {
+                            MessageBox.Show("Mitarbeiter/-in erfolgreich geändert!");
+                            this.DialogResult = true;
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Fehler beim Ändern des Mitarbeiters/-in!");
+                        }
+
                         break;
                     case MessageBoxResult.No:
                         break;
                 }
 
-                if (status == true)
-                {
-                    MessageBox.Show("Mitarbeiter erfolgreich geändert!");
-                    this.DialogResult = true;
-                    this.Close();
-                }
+
             }
         }
     }

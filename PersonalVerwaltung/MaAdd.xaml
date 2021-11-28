@@ -31,25 +31,25 @@
     <Border Background="#272537" CornerRadius="20" BorderBrush="#37344e" BorderThickness="2">
         <StackPanel HorizontalAlignment="Center" Margin="10">
             <Label Content="Vorname:" />
-            <TextBox x:Name="vorname" Width="100" HorizontalAlignment="Left"/>
+            <TextBox x:Name="vorname" Width="100" MaxLength="50" HorizontalAlignment="Left"/>
             <Label Content="Nachname:"/>
-            <TextBox x:Name="nachname" Width="100" HorizontalAlignment="Left"/>
+            <TextBox x:Name="nachname" Width="100" MaxLength="50" HorizontalAlignment="Left"/>
             <Label Content="Straße &amp; Hausnummer:"/>
-            <TextBox x:Name="strasse" Width="100" HorizontalAlignment="Left"/>
+            <TextBox x:Name="strasse" Width="100" MaxLength="50" HorizontalAlignment="Left"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Plz:"/>
                 <Label Content="Ort:" Margin="80,0,0,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <ComboBox x:Name="combo_plz" ItemsSource="{StaticResource ortList}" DisplayMemberPath="LandPlz" Width="80" SelectionChanged="onSelectionChangedPlz"/>
+                <ComboBox x:Name="combo_plz" ItemsSource="{StaticResource ortList}" DisplayMemberPath="LandPlz" Width="100" SelectionChanged="onSelectionChangedPlz"/>
                 <TextBox x:Name="ort" Margin="15,0,0,0" Width="150"/>
             </StackPanel>
             <Label Content="Familienstand:"/>
             <ComboBox x:Name="combo_marital" ItemsSource="{StaticResource familienstandList}" DisplayMemberPath="Stand" Width="150" HorizontalAlignment="Left"/>
             <Label Content="E-Mail:"/>
-            <TextBox x:Name="email" Width="100" HorizontalAlignment="Left"/>
+            <TextBox x:Name="email" Width="100" MaxLength="80" HorizontalAlignment="Left"/>
             <Label Content="Telefon:"/>
-            <TextBox x:Name="telefon" Width="100" HorizontalAlignment="Left"/>
+            <TextBox x:Name="telefon" Width="100" MaxLength="30" HorizontalAlignment="Left"/>
             <Label Content="Abteilung:"/>
             <ComboBox x:Name="combo_abt" ItemsSource="{StaticResource abteilungList}" DisplayMemberPath="Bezeichnung" Width="150" HorizontalAlignment="Left"/>
             <Label Content="Beruf:"/>
