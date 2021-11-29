@@ -107,6 +107,9 @@
     <Compile Include="Schichtplanung.xaml.cs">
       <DependentUpon>Schichtplanung.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StundenAdd.xaml.cs">
+      <DependentUpon>StundenAdd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StundenEdit.xaml.cs">
       <DependentUpon>StundenEdit.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Schichtplanung.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StundenAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

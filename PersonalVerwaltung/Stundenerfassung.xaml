@@ -18,18 +18,12 @@
             <ToolBar Background="Transparent" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
                 <Menu Background="Transparent" ToolBar.OverflowMode="Never">
                     <TextBox DockPanel.Dock="Top"  Name="txtFilter" Grid.Row="1" Height="25" Width="200" HorizontalAlignment="Left" />
-                    <Button Background="Transparent" Margin="-15,0,0,0">
-                        <TextBlock Foreground="White" FontSize="20">🔍</TextBlock>
-                    </Button>
-                    <ComboBox Width="200" Margin="0,0,50,0" Height="25">Kalender</ComboBox>
+                    <ComboBox Width="200" Height="25">Kalender</ComboBox>
                     <Button Background="Transparent"  Width="50">
-                        <TextBlock Foreground="White" FontSize="20">✏️</TextBlock>
+                        <TextBlock Foreground="White" FontSize="20">➕</TextBlock>
                     </Button>
                     <Button Background="Transparent" Width="50">
                         <TextBlock Foreground="White" FontSize="20">💡</TextBlock>
-                    </Button>
-                    <Button Background="Transparent" Width="50">
-                        <TextBlock Foreground="White" FontSize="20">🗑️</TextBlock>
                     </Button>
                 </Menu>
             </ToolBar>
@@ -39,8 +33,8 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Personalnummer" Width="200" DisplayMemberBinding="{Binding Personalnummer}"/>
-                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Vorname" Width="200" DisplayMemberBinding="{Binding Vorname}"/>
+                    <GridViewColumn Header="Vorname" Width="150" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding Vorname}"/>
                     <GridViewColumn Header="Stunden" Width="150" DisplayMemberBinding="{Binding Stunden}"/>
                 </GridView>
             </ListView.View>
