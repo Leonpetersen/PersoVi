@@ -57,12 +57,12 @@
             <Label Content="Eintrittsdatum:"/>
             <DatePicker Name="eintritt" Width="150" HorizontalAlignment="Left" SelectedDate="{x:Static sys:DateTime.Now}"/>
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                <Button Background="Transparent" Grid.Row="3" HorizontalAlignment="Left" Click="saveEmployeeData">
+                <Button Background="Transparent" HorizontalAlignment="Left" Click="saveEmployeeData">
                     <TextBlock FontSize="20">
                  💾
                     </TextBlock>
                 </Button>
-                <Button Background="Transparent" Grid.Row="3" HorizontalAlignment="Left" Click="closeWindow">
+                <Button Background="Transparent" HorizontalAlignment="Left" Click="closeWindow">
                     <TextBlock FontSize="20">
                  ❌
                     </TextBlock>

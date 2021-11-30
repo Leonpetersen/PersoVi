@@ -38,5 +38,19 @@ namespace PersonalVerwaltung
                 mainPanelBorder.Margin = new Thickness();
             }
         }
+
+        private void createTimeRecord(object sender, RoutedEventArgs e)
+        {
+  
+            StundenAdd stundenAdd = new StundenAdd();
+            bool? dialogStatus = stundenAdd.ShowDialog();
+            if (dialogStatus == true)
+            {
+                MessageBox.Show("Arbeitszeit wurde erfasst!");
+                //Refresh Stundenerfassung
+
+            }
+
+        }
     }
 }

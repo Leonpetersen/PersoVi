@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalVerwaltung"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
         Title="StundenAdd" Height="100" Width="800"
         Background="Transparent"
@@ -15,18 +14,57 @@
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="White"/>
         </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
         <local:EmployeeList x:Key="employeeList"/>
-        
+        <local:StundenList x:Key="stundenList"/>
+        <local:MinutenList x:Key="minutenList"/>
     </Window.Resources>
     <Border Background="#272537" CornerRadius="20" BorderBrush="#37344e" BorderThickness="2">
-        <StackPanel Margin= "10" Orientation="Horizontal" Height="100" VerticalAlignment="Top">
+        <StackPanel Margin= "10" Orientation="Horizontal" Height="100" VerticalAlignment="Top" HorizontalAlignment="Center">
             <StackPanel>
                 <Label Content="Mitarbeiter:"/>
                 <ComboBox x:Name="combo_employee" ItemsSource="{StaticResource employeeList}" DisplayMemberPath="Employeenr" Width="100"/>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Margin="20,0,0,0">
                 <Label Content="Beginn:"/>
+                <DatePicker Name="beginDate" Width="140"/>
             </StackPanel>
+            <StackPanel Margin="10,0,0,0">
+                <Label Content="Startzeit:"/>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox x:Name="hour_start" Width="45" ItemsSource="{StaticResource stundenList}"/>
+                    <TextBlock Text=":" Margin="5,0,5,0"/>
+                    <ComboBox x:Name="minute_start" Width="45" ItemsSource="{StaticResource minutenList}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Margin="20,0,0,0">
+                <Label Content="Ende:"/>
+                <DatePicker Name="endDate" Width="140"/>
+            </StackPanel>
+            <StackPanel Margin="10,0,0,0">
+                <Label Content="Endzeit:"/>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox x:Name="hour_end" Width="45" ItemsSource="{StaticResource stundenList}"/>
+                    <TextBlock Text=":" Margin="5,0,5,0"/>
+                    <ComboBox x:Name="minute_end" Width="45" ItemsSource="{StaticResource minutenList}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="40,0,0,27">
+                <Button Background="Transparent" HorizontalAlignment="Left" Click="saveTimeRecording">
+                    <TextBlock FontSize="20">
+                 💾
+                    </TextBlock>
+                </Button>
+                <Button Background="Transparent" Margin="10,0,0,0" HorizontalAlignment="Left" Click="closeWindow">
+                    <TextBlock FontSize="20">
+                 ❌
+                    </TextBlock>
+                </Button>
+            </StackPanel>
+
         </StackPanel>
+        
     </Border>
 </Window>

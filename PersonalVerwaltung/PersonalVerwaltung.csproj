@@ -90,6 +90,7 @@
     <Compile Include="MAanzeige.xaml.cs">
       <DependentUpon>MAanzeige.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MinutenList.cs" />
     <Compile Include="Mitarbeiter.xaml.cs">
       <DependentUpon>Mitarbeiter.xaml</DependentUpon>
     </Compile>
@@ -116,9 +117,11 @@
     <Compile Include="Stundenerfassung.xaml.cs">
       <DependentUpon>Stundenerfassung.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StundenList.cs" />
     <Compile Include="StundenMa.xaml.cs">
       <DependentUpon>StundenMa.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TimeRecord.cs" />
     <Page Include="Einstellungen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
