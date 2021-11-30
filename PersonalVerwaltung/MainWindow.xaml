@@ -50,7 +50,7 @@
                         <Image Source="Images\uhr.png"
                            Height="45"/>
                         <TextBlock VerticalAlignment="Center" Margin="5">
-                            Stundenerfassung
+                            Zeiterfassung
                         </TextBlock>
                     </StackPanel>
                 </Button>

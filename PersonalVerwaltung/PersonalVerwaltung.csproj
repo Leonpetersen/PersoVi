@@ -77,6 +77,8 @@
     <Compile Include="Familienstand.cs" />
     <Compile Include="FamilienstandList.cs" />
     <Compile Include="Hilfsmittel.cs" />
+    <Compile Include="Kalenderwoche.cs" />
+    <Compile Include="KalenderwocheList.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -122,6 +124,8 @@
       <DependentUpon>StundenMa.xaml</DependentUpon>
     </Compile>
     <Compile Include="TimeRecord.cs" />
+    <Compile Include="WorkingTimeEmployee.cs" />
+    <Compile Include="WorkingTimeEmployeeList.cs" />
     <Page Include="Einstellungen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
