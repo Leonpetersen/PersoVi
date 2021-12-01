@@ -23,7 +23,7 @@
             <ToolBar Background="Transparent" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
                 <Menu Background="Transparent" ToolBar.OverflowMode="Never">
                     <TextBox DockPanel.Dock="Top"  Name="txtFilter" Grid.Row="1" Height="25" Width="200" HorizontalAlignment="Left" />
-                    <ComboBox Width="200" Height="25" ItemsSource="{StaticResource kalenderwochen}" DisplayMemberPath="Wochenbezeichnung"/>
+                    <ComboBox Width="200" Height="25" ItemsSource="{StaticResource kalenderwochen}" DisplayMemberPath="Wochenbezeichnung" SelectedIndex="0"/>
                     <Button Background="Transparent"  Width="50" Click="createTimeRecord">
                         <TextBlock Foreground="White" FontSize="20">➕</TextBlock>
                     </Button>

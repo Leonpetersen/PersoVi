@@ -23,8 +23,16 @@ namespace PersonalVerwaltung
             if (dbConnector.dbConn != null)
             {
                 this.Clear();
-                query = "SELECT zeiterfassung.personalnr, vorname, nachname, SUM(arbeitszeit) AS summearbeitszeit FROM zeiterfassung INNER JOIN mitarbeiter ON zeiterfassung.personalnr = mitarbeiter.personalnr GROUP BY zeiterfassung.personalnr ORDER BY zeiterfassung.personalnr ASC";
+
+                //Hole Daten zu aktueller Kalenderwoche
+                Kalenderwoche kalenderwoche = Hilfsmittel.getCurrentCalendarWeek();
+
+                query = "SELECT zeiterfassung.personalnr, vorname, nachname, SUM(arbeitszeit) AS summearbeitszeit FROM zeiterfassung INNER JOIN mitarbeiter ON zeiterfassung.personalnr = mitarbeiter.personalnr " +
+                    "WHERE beginn >= @beg AND ende <= @end GROUP BY zeiterfassung.personalnr ORDER BY zeiterfassung.personalnr ASC";
                 query_cmd.CommandText = query;
+                query_cmd.Parameters.AddWithValue("@beg", kalenderwoche.Startdatum);
+                query_cmd.Parameters.AddWithValue("@end", kalenderwoche.Enddatum);
+
 
                 dbConnector.dbConn.Open();
 
