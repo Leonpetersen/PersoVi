@@ -19,9 +19,12 @@ namespace PersonalVerwaltung
     /// </summary>
     public partial class StundenMa : Window
     {
-        public StundenMa()
+        public StundenMa(WorkingTimeEmployee workingTimeEmployee, Kalenderwoche kalenderwoche)
         {
             InitializeComponent();
+            personalnr.Text = personalnr.Text + " " + workingTimeEmployee.Employeenr.ToString();
+            name.Text = name.Text + " " + workingTimeEmployee.Firstname + " " + workingTimeEmployee.Lastname;
+            kw.Text = kw.Text + " " + kalenderwoche.Wochennr;
         }
         private void ToolBar_Loaded(object sender, RoutedEventArgs e)
         {

@@ -10,29 +10,39 @@
         ResizeMode="CanResizeWithGrip"
         Background="Transparent"
         AllowsTransparency="True">
-    <!-- Leon fügt hier eine Übersicht der Stunden für einen Mitarbeiter ein "Klick auf die Glühbirne"-->
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+        <local:WorkingDayEmployeeList x:Key="workingDayEmployeeList"/>
+    </Window.Resources>
 
-    <Border Background="#272537"
-        CornerRadius="20">
+    <Border Background="#272537" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="90"/>
-                <RowDefinition Height="90"/>
-                <RowDefinition Height="90"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
-            <TextBlock Text="Personalnummer:" Foreground="White" Margin="10" Grid.Row="0"/>
-            <TextBlock Text="Name:" Foreground="White" Margin="10" Grid.Row="1"/>
-            <TextBlock Text="Vorname:" Foreground="White" Margin="10" Grid.Row="2"/>
-            <TextBox Grid.Row="0" Height="20" Margin="10" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="1" Height="20" Margin="10" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="2" Height="20" Margin="10" VerticalAlignment="Center"/>
-            <ListView Grid.Row="3">
-                Stundenanzeige der MA
+            <StackPanel Orientation="Vertical" Grid.Row="0">
+                <TextBlock Text="Personalnummer:" Name="personalnr" Foreground="White" Margin="20,20,0,0"/>
+                <TextBlock Text="Name:" Name="name" Foreground="White" Margin="20,0,0,0"/>
+                <TextBlock Text="KW:" Name="kw" Foreground="White" Margin="20,0,0,0"/>
+                <TextBlock Text="Arbeitszeit gesamt (Woche):" Name="arbeitszeit" Foreground="White" Margin="20,0,0,0"/>
+            </StackPanel>
+            <ListView Grid.Row="1" ItemsSource="{StaticResource workingDayEmployeeList}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Datum" Width="100" DisplayMemberBinding="{Binding Date}"/>
+                        <GridViewColumn Header="Ankunft" Width="100" DisplayMemberBinding="{Binding Starttime}"/>
+                        <GridViewColumn Header="Ende" Width="100" DisplayMemberBinding="{Binding Endtime}"/>
+                        <GridViewColumn Header="Pausenzeit" Width="100" DisplayMemberBinding="{Binding Breaktime}"/>
+                        <GridViewColumn Header="Arbeitszeit gesamt" Width="150" DisplayMemberBinding="{Binding Totalhours}"/>
+                    </GridView>
+                </ListView.View>
             </ListView>
-            <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
+            
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
                 <ToolBarTray Grid.Row="1" Background="Transparent">
                     <ToolBar Background="Transparent" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
                         <Menu Background="Transparent" ToolBar.OverflowMode="Never">

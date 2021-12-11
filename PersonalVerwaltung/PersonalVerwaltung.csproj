@@ -124,6 +124,8 @@
       <DependentUpon>StundenMa.xaml</DependentUpon>
     </Compile>
     <Compile Include="TimeRecord.cs" />
+    <Compile Include="WorkingDayEmployee.cs" />
+    <Compile Include="WorkingDayEmployeeList.cs" />
     <Compile Include="WorkingTimeEmployee.cs" />
     <Compile Include="WorkingTimeEmployeeList.cs" />
     <Page Include="Einstellungen.xaml">

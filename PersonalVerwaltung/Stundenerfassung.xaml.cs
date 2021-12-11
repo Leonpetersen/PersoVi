@@ -20,9 +20,48 @@ namespace PersonalVerwaltung
     /// </summary>
     public partial class Stundenerfassung : UserControl
     {
+        public CollectionView WorkingTimeView;
         public Stundenerfassung()
         {
             InitializeComponent();
+            WorkingTimeView = (CollectionView)CollectionViewSource.GetDefaultView(workingTimeEmployees.ItemsSource);
+            WorkingTimeView.Filter = TimeFilter;
+        }
+
+        private bool TimeFilter(object item)
+        {
+            bool entryExists;
+
+            if (String.IsNullOrEmpty(txtFilter.Text))
+            {
+                //return true;
+                entryExists = true;
+            }
+            else
+            {
+                //Prüfe Personalnummer
+                if (((item as WorkingTimeEmployee).Employeenr.ToString().IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    entryExists = true;
+                }
+                //Prüfe Vorname
+                else if (((item as WorkingTimeEmployee).Firstname.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    entryExists = true;
+                }
+                //Prüfe Nachname
+                else if (((item as WorkingTimeEmployee).Lastname.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    entryExists = true;
+                }
+                else
+                {
+                    entryExists = false;
+                }
+
+            }
+            return entryExists;
+
         }
         private void ToolBar_Loaded(object sender, RoutedEventArgs e)
         {
@@ -51,6 +90,30 @@ namespace PersonalVerwaltung
 
             }
 
+        }
+
+        private void refreshTimeTable(object sender, SelectionChangedEventArgs e)
+        {
+            if (WorkingTimeView != null)
+            {
+                WorkingTimeEmployeeList workingTimeEmployeeList = (WorkingTimeEmployeeList)this.TryFindResource("workingTimeEmployeeList");
+                Kalenderwoche kalenderwoche = (Kalenderwoche)combo_kw.SelectedItem;
+                workingTimeEmployeeList.Refresh(kalenderwoche);
+                WorkingTimeView.Refresh();
+            }
+
+          
+        }
+
+        private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            WorkingTimeView.Refresh();
+        }
+
+        private void showEmployeeDetail(object sender, MouseButtonEventArgs e)
+        {
+            StundenMa stundenMa = new StundenMa((WorkingTimeEmployee)workingTimeEmployees.SelectedItem, (Kalenderwoche)combo_kw.SelectedItem);
+            stundenMa.Show();
         }
     }
 }
