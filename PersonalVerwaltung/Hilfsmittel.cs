@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace PersonalVerwaltung
 {
     public static class Hilfsmittel
     {
+
         public static bool isValidEmail(string emailaddress)
         {
             try
@@ -80,6 +82,45 @@ namespace PersonalVerwaltung
                 default:
                     return 0;
             }
+        }
+
+        public static string getTotalHoursWeek(Kalenderwoche kalenderwoche, int employeenr)
+        {
+            DbConnector dbConnector = new DbConnector();
+            string query = "";
+
+            MySqlCommand query_cmd = new MySqlCommand(query, dbConnector.dbConn);
+
+            if (dbConnector.dbConn != null)
+            {
+
+                query = "SELECT SUM(arbeitszeit) AS summe FROM zeiterfassung WHERE beginn >= @beg AND ende <= @end AND personalnr = @pnr";
+                query_cmd.CommandText = query;
+                query_cmd.Parameters.AddWithValue("@beg", kalenderwoche.Startdatum);
+                query_cmd.Parameters.AddWithValue("@end", kalenderwoche.Enddatum);
+                query_cmd.Parameters.AddWithValue("@pnr", employeenr);
+
+                dbConnector.dbConn.Open();
+
+                MySqlDataReader reader = query_cmd.ExecuteReader();
+
+                if (reader.HasRows == true)
+                {
+                    while (reader.Read())
+                    {
+                        return reader["summe"].ToString() + " Std.";
+                    }
+                }
+                else
+                {
+                    return "0 Stunden";
+                }
+      
+
+                dbConnector.dbConn.Close();
+            }
+            return "0 Stunden";
+
         }
     }
 }

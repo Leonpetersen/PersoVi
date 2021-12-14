@@ -22,9 +22,12 @@ namespace PersonalVerwaltung
         public StundenMa(WorkingTimeEmployee workingTimeEmployee, Kalenderwoche kalenderwoche)
         {
             InitializeComponent();
+            WorkingDayEmployeeList workingDayEmployeeList = (WorkingDayEmployeeList)this.TryFindResource("workingDayEmployeeList");
+            workingDayEmployeeList.Refresh(kalenderwoche, workingTimeEmployee.Employeenr);
             personalnr.Text = personalnr.Text + " " + workingTimeEmployee.Employeenr.ToString();
             name.Text = name.Text + " " + workingTimeEmployee.Firstname + " " + workingTimeEmployee.Lastname;
             kw.Text = kw.Text + " " + kalenderwoche.Wochennr;
+            arbeitszeit.Text = arbeitszeit.Text + " " + Hilfsmittel.getTotalHoursWeek(kalenderwoche, workingTimeEmployee.Employeenr);
         }
         private void ToolBar_Loaded(object sender, RoutedEventArgs e)
         {
@@ -40,5 +43,21 @@ namespace PersonalVerwaltung
                 mainPanelBorder.Margin = new Thickness();
             }
         }
+
+        private void minimize(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void smaller(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void shutdown(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

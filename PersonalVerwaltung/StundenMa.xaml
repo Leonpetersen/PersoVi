@@ -11,29 +11,31 @@
         Background="Transparent"
         AllowsTransparency="True">
     <Window.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="13"/>
-        </Style>
         <local:WorkingDayEmployeeList x:Key="workingDayEmployeeList"/>
     </Window.Resources>
 
-    <Border Background="#272537" CornerRadius="20">
+    <Border Background="#272537" CornerRadius="20" BorderBrush="#37344e" BorderThickness="2">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Vertical" Grid.Row="0">
+            <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" Margin="0,5,0,0">
+                <Button x:Name="btn_minimize" Click="minimize" FontFamily="Marlett" Content="0" Width="40" FontSize="20"/>
+                <Button x:Name="btn_smaller" Click="smaller" FontFamily="Marlett" Content="2" Width="40" FontSize="20"/>
+                <Button x:Name="btn_shutdown" Click="shutdown" FontFamily="Marlett" Content="r" Foreground="Red" Width="40" FontSize="20"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,10,0,0">
                 <TextBlock Text="Personalnummer:" Name="personalnr" Foreground="White" Margin="20,20,0,0"/>
                 <TextBlock Text="Name:" Name="name" Foreground="White" Margin="20,0,0,0"/>
                 <TextBlock Text="KW:" Name="kw" Foreground="White" Margin="20,0,0,0"/>
                 <TextBlock Text="Arbeitszeit gesamt (Woche):" Name="arbeitszeit" Foreground="White" Margin="20,0,0,0"/>
             </StackPanel>
-            <ListView Grid.Row="1" ItemsSource="{StaticResource workingDayEmployeeList}">
+            <ListView Grid.Row="2" Name="workingDayEmployeeList" ItemsSource="{StaticResource workingDayEmployeeList}" Margin="10" Background="Transparent" BorderBrush="Transparent" Foreground="White">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Datum" Width="100" DisplayMemberBinding="{Binding Date}"/>
+                        <GridViewColumn Header="Datum" Width="150" DisplayMemberBinding="{Binding Date}"/>
                         <GridViewColumn Header="Ankunft" Width="100" DisplayMemberBinding="{Binding Starttime}"/>
                         <GridViewColumn Header="Ende" Width="100" DisplayMemberBinding="{Binding Endtime}"/>
                         <GridViewColumn Header="Pausenzeit" Width="100" DisplayMemberBinding="{Binding Breaktime}"/>
@@ -42,23 +44,7 @@
                 </ListView.View>
             </ListView>
             
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
-                <ToolBarTray Grid.Row="1" Background="Transparent">
-                    <ToolBar Background="Transparent" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
-                        <Menu Background="Transparent" ToolBar.OverflowMode="Never">
-                            <Button Background="Transparent" Width="50">
-                                <TextBlock Foreground="White" FontSize="20">✏️</TextBlock>
-                            </Button>
-                            <Button Background="Transparent" Width="50">
-                                <TextBlock Foreground="White" FontSize="20">🗑️</TextBlock>
-                            </Button>
-                            <Button Background="Transparent" Width="50">
-                                <TextBlock Foreground="White" FontSize="20"> ❌</TextBlock>
-                            </Button>
-                        </Menu>
-                    </ToolBar>
-                </ToolBarTray>
-            </StackPanel>
+   
         </Grid>
     </Border>
 </Window>
