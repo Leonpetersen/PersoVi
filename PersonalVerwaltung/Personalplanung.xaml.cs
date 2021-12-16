@@ -22,6 +22,7 @@ namespace PersonalVerwaltung
     public partial class Personalplanung : UserControl
     {
         public DbConnector dbConnector = new DbConnector();
+        public DateTime[] wochentage = new DateTime[7];
         public Personalplanung()
         {
             InitializeComponent();
@@ -43,7 +44,7 @@ namespace PersonalVerwaltung
 
             //Planer initialisieren
             Kalenderwoche kalenderwoche = (Kalenderwoche)combo_kw.SelectedItem;
-            DateTime[] wochentage = new DateTime[7];
+            
             DateTime datum = kalenderwoche.Startdatum;
 
             for (int i = 0; i <= 6; i++)
@@ -82,13 +83,13 @@ namespace PersonalVerwaltung
                     switch (schichteinsatz.Art)
                     {
                         case "F":
-                            montagFrüh.Children.Add(newButton);
+                            dienstagFrüh.Children.Add(newButton);
                             break;
                         case "S":
-                            montagSpät.Children.Add(newButton);
+                            dienstagSpät.Children.Add(newButton);
                             break;
                         case "N":
-                            montagNacht.Children.Add(newButton);
+                            dienstagNacht.Children.Add(newButton);
                             break;
                     }
                 }
@@ -97,13 +98,13 @@ namespace PersonalVerwaltung
                     switch (schichteinsatz.Art)
                     {
                         case "F":
-                            montagFrüh.Children.Add(newButton);
+                            mittwochFrüh.Children.Add(newButton);
                             break;
                         case "S":
-                            montagSpät.Children.Add(newButton);
+                            mittwochSpät.Children.Add(newButton);
                             break;
                         case "N":
-                            montagNacht.Children.Add(newButton);
+                            mittwochNacht.Children.Add(newButton);
                             break;
                     }
                 }
@@ -112,13 +113,13 @@ namespace PersonalVerwaltung
                     switch (schichteinsatz.Art)
                     {
                         case "F":
-                            montagFrüh.Children.Add(newButton);
+                            donnerstagFrüh.Children.Add(newButton);
                             break;
                         case "S":
-                            montagSpät.Children.Add(newButton);
+                            donnerstagSpät.Children.Add(newButton);
                             break;
                         case "N":
-                            montagNacht.Children.Add(newButton);
+                            donnerstagNacht.Children.Add(newButton);
                             break;
                     }
                 }
@@ -127,13 +128,13 @@ namespace PersonalVerwaltung
                     switch (schichteinsatz.Art)
                     {
                         case "F":
-                            montagFrüh.Children.Add(newButton);
+                            freitagFrüh.Children.Add(newButton);
                             break;
                         case "S":
-                            montagSpät.Children.Add(newButton);
+                            freitagSpät.Children.Add(newButton);
                             break;
                         case "N":
-                            montagNacht.Children.Add(newButton);
+                            freitagNacht.Children.Add(newButton);
                             break;
                     }
                 }
@@ -142,13 +143,13 @@ namespace PersonalVerwaltung
                     switch (schichteinsatz.Art)
                     {
                         case "F":
-                            montagFrüh.Children.Add(newButton);
+                            samstagFrüh.Children.Add(newButton);
                             break;
                         case "S":
-                            montagSpät.Children.Add(newButton);
+                            samstagSpät.Children.Add(newButton);
                             break;
                         case "N":
-                            montagNacht.Children.Add(newButton);
+                            samstagNacht.Children.Add(newButton);
                             break;
                     }
                 }
@@ -157,19 +158,19 @@ namespace PersonalVerwaltung
                     switch (schichteinsatz.Art)
                     {
                         case "F":
-                            montagFrüh.Children.Add(newButton);
+                            sonntagFrüh.Children.Add(newButton);
                             break;
                         case "S":
-                            montagSpät.Children.Add(newButton);
+                            sonntagSpät.Children.Add(newButton);
                             break;
                         case "N":
-                            montagNacht.Children.Add(newButton);
+                            sonntagNacht.Children.Add(newButton);
                             break;
                     }
                 }
                 
             }
-          
+
         }
 
         private void startDragEvent(object sender, MouseButtonEventArgs e)
@@ -191,13 +192,115 @@ namespace PersonalVerwaltung
             string name = (string)e.Data.GetData("Name");
             int employeenr = (int)e.Data.GetData("Pnr");
 
-            Button newButton = new Button();
-            newButton.Name = "e" + employeenr.ToString();
-            newButton.Content = name;
-            newButton.FontSize = 12;
-            newButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-            newButton.Click += new RoutedEventHandler(removeEmployee);
-            stackPanel.Children.Add(newButton);
+            //Ermittle Schichtnr
+            Kalenderwoche kalenderwoche = (Kalenderwoche)combo_kw.SelectedItem;
+            DateTime? datum = null;
+            string art = string.Empty;
+            switch (stackPanel.Name)
+            {
+                case "montagFrüh":
+                    datum = wochentage[0] + new TimeSpan(6,0,0);
+                    art = "F";
+                    break;
+                case "montagSpät":
+                    datum = wochentage[0] + new TimeSpan(14, 0, 0);
+                    art = "S";
+                    break;
+                case "montagNacht":
+                    datum = wochentage[0] + new TimeSpan(22, 0, 0);
+                    art = "N";
+                    break;
+                case "dienstagFrüh":
+                    datum = wochentage[1] + new TimeSpan(6, 0, 0);
+                    art = "F";
+                    break;
+                case "dienstagSpät":
+                    datum = wochentage[1] + new TimeSpan(14, 0, 0);
+                    art = "S";
+                    break;
+                case "dienstagNacht":
+                    datum = wochentage[1] + new TimeSpan(22, 0, 0);
+                    art = "N";
+                    break;
+                case "mittwochFrüh":
+                    datum = wochentage[2] + new TimeSpan(6, 0, 0);
+                    art = "F";
+                    break;
+                case "mittwochSpät":
+                    datum = wochentage[2] + new TimeSpan(14, 0, 0);
+                    art = "S";
+                    break;
+                case "mittwochNacht":
+                    datum = wochentage[2] + new TimeSpan(22, 0, 0);
+                    art = "N";
+                    break;
+                case "donnerstagFrüh":
+                    datum = wochentage[3] + new TimeSpan(6, 0, 0);
+                    art = "F";
+                    break;
+                case "donnerstagSpät":
+                    datum = wochentage[3] + new TimeSpan(14, 0, 0);
+                    art = "S";
+                    break;
+                case "donnerstagNacht":
+                    datum = wochentage[3] + new TimeSpan(22, 0, 0);
+                    art = "N";
+                    break;
+                case "freitagFrüh":
+                    datum = wochentage[4] + new TimeSpan(6, 0, 0);
+                    art = "F";
+                    break;
+                case "freitagSpät":
+                    datum = wochentage[4] + new TimeSpan(14, 0, 0);
+                    art = "S";
+                    break;
+                case "freitagNacht":
+                    datum = wochentage[4] + new TimeSpan(22, 0, 0);
+                    art = "N";
+                    break;
+                case "samstagFrüh":
+                    datum = wochentage[5] + new TimeSpan(6, 0, 0);
+                    art = "F";
+                    break;
+                case "samstagSpät":
+                    datum = wochentage[5] + new TimeSpan(14, 0, 0);
+                    art = "S";
+                    break;
+                case "samstagNacht":
+                    datum = wochentage[5] + new TimeSpan(22, 0, 0);
+                    art = "N";
+                    break;
+                case "sonntagFrüh":
+                    datum = wochentage[6] + new TimeSpan(6, 0, 0);
+                    art = "F";
+                    break;
+                case "sonntagSpät":
+                    datum = wochentage[6] + new TimeSpan(14, 0, 0);
+                    art = "S";
+                    break;
+                case "sonntagNacht":
+                    datum = wochentage[6] + new TimeSpan(22, 0, 0);
+                    art = "N";
+                    break;
+            }
+
+            int shiftnr = Schichteinsatz.getShiftNr(datum, art);
+
+            bool result = Schichteinsatz.createShiftEntry(employeenr, shiftnr);
+            if (result == true)
+            {
+                Button newButton = new Button();
+                newButton.Name = "e" + employeenr.ToString();
+                newButton.Content = name;
+                newButton.FontSize = 12;
+                newButton.HorizontalContentAlignment = HorizontalAlignment.Left;
+                newButton.Click += new RoutedEventHandler(removeEmployee);
+                stackPanel.Children.Add(newButton);
+            }
+            else
+            {
+                MessageBox.Show("Fehler beim Erfassen der Schichtzuordnung!");
+            }
         }
 
         private void removeEmployee(object sender, RoutedEventArgs e)
