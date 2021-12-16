@@ -6,11 +6,81 @@
              xmlns:local="clr-namespace:PersonalVerwaltung"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <StackPanel>
-            <ListView>
-                <!--Leon macht die Startseite - Listview des Schichtplans-->
-            </ListView>
-        </StackPanel>  
-    </Grid>
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <local:KalenderwocheList x:Key="kalenderwochen"/>
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock HorizontalAlignment="left" Name="textBlock1" Text="Personalplanung" FontSize="50" Margin="10"/>
+        <ComboBox Name="combo_kw" HorizontalAlignment="Left" Width="200" Margin="10,0,0,0" Height="20" FontSize="12" ItemsSource="{StaticResource kalenderwochen}" DisplayMemberPath="Wochenbezeichnung" SelectedIndex="0"/>
+        <Grid Margin="10,10,5,0" Height="320">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Column="0" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Mo." FontWeight="Bold" Grid.Column="0" Grid.Row="0"/>
+                <TextBlock Text="Di." FontWeight="Bold" Grid.Column="1" Grid.Row="0"/>
+                <TextBlock Text="Mi." FontWeight="Bold" Grid.Column="2" Grid.Row="0"/>
+                <TextBlock Text="Do." FontWeight="Bold" Grid.Column="3" Grid.Row="0"/>
+                <TextBlock Text="Fr." FontWeight="Bold" Grid.Column="4" Grid.Row="0"/>
+                <TextBlock Text="Sa." FontWeight="Bold" Grid.Column="5" Grid.Row="0"/>
+                <TextBlock Text="So." FontWeight="Bold" Grid.Column="6" Grid.Row="0"/>
+                <!--Montag-->
+                <StackPanel Grid.Row="1" Grid.Column="0" x:Name="montagFrüh" Background="LightSkyBlue" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="2" Grid.Column="0" x:Name="montagSpät" Background="LightGreen" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="3" Grid.Column="0" x:Name="montagNacht" Background="LightCoral" AllowDrop="True" Drop="handleDrop"/>
+                <!--Dienstag-->
+                <StackPanel Grid.Row="1" Grid.Column="1" x:Name="dienstagFrüh" Background="LightSkyBlue" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="2" Grid.Column="1" x:Name="dienstagSpät" Background="LightGreen" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="3" Grid.Column="1" x:Name="dienstagNacht" Background="LightCoral" AllowDrop="True" Drop="handleDrop"/>
+                <!--Mittwoch-->
+                <StackPanel Grid.Row="1" Grid.Column="2" x:Name="mittwochFrüh" Background="LightSkyBlue" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="2" Grid.Column="2" x:Name="mittwochSpät" Background="LightGreen" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="3" Grid.Column="2" x:Name="mittwochNacht" Background="LightCoral" AllowDrop="True" Drop="handleDrop"/>
+                <!--Donnerstag-->
+                <StackPanel Grid.Row="1" Grid.Column="3" x:Name="donnerstagFrüh" Background="LightSkyBlue" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="2" Grid.Column="3" x:Name="donnerstagSpät" Background="LightGreen" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="3" Grid.Column="3" x:Name="donnerstagNacht" Background="LightCoral" AllowDrop="True" Drop="handleDrop"/>
+                <!--Freitag-->
+                <StackPanel Grid.Row="1" Grid.Column="4" x:Name="freitagFrüh" Background="LightSkyBlue" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="2" Grid.Column="4" x:Name="freitagSpät" Background="LightGreen" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="3" Grid.Column="4" x:Name="freitagNacht" Background="LightCoral" AllowDrop="True" Drop="handleDrop"/>
+                <!--Samstag-->
+                <StackPanel Grid.Row="1" Grid.Column="5" x:Name="samstagFrüh" Background="LightSkyBlue" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="2" Grid.Column="5" x:Name="samstagSpät" Background="LightGreen" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="3" Grid.Column="5" x:Name="samstagNacht" Background="LightCoral" AllowDrop="True" Drop="handleDrop"/>
+                <!--Sonntag-->
+                <StackPanel Grid.Row="1" Grid.Column="6" x:Name="sonntagFrüh" Background="LightSkyBlue" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="2" Grid.Column="6" x:Name="sonntagSpät" Background="LightGreen" AllowDrop="True" Drop="handleDrop"/>
+                <StackPanel Grid.Row="3" Grid.Column="6" x:Name="sonntagNacht" Background="LightCoral" AllowDrop="True" Drop="handleDrop"/>
+            </Grid>
+            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="3" CornerRadius="3" Margin="5">
+                <StackPanel x:Name="employeePanel" Margin="2">
+                    <TextBlock Text="Verfügbare Mitarbeiter:" FontWeight="Bold" TextDecorations="Underline"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </StackPanel>  
 </UserControl>

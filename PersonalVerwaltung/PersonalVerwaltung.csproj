@@ -107,6 +107,7 @@
     <Compile Include="PlanungEdit.xaml.cs">
       <DependentUpon>PlanungEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Schichteinsatz.cs" />
     <Compile Include="Schichtplanung.xaml.cs">
       <DependentUpon>Schichtplanung.xaml</DependentUpon>
     </Compile>
