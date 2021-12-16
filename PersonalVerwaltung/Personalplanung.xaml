@@ -15,7 +15,16 @@
     </UserControl.Resources>
     <StackPanel>
         <TextBlock HorizontalAlignment="left" Name="textBlock1" Text="Personalplanung" FontSize="50" Margin="10"/>
-        <ComboBox Name="combo_kw" HorizontalAlignment="Left" Width="200" Margin="10,0,0,0" Height="20" FontSize="12" ItemsSource="{StaticResource kalenderwochen}" DisplayMemberPath="Wochenbezeichnung" SelectedIndex="0"/>
+        <StackPanel Orientation="Horizontal">
+            <ComboBox Name="combo_kw" HorizontalAlignment="Left" Width="200" Margin="10,0,0,0" Height="20" FontSize="12" ItemsSource="{StaticResource kalenderwochen}" DisplayMemberPath="Wochenbezeichnung" SelectedIndex="0" SelectionChanged="refreshShiftPlan"/>
+            <Rectangle Fill="LightSkyBlue" Width="20" Margin="20,0,0,0"/>
+            <TextBlock Text="Frühschicht" Margin="5,0,0,0" VerticalAlignment="Center"/>
+            <Rectangle Fill="LightGreen" Width="20" Margin="20,0,0,0"/>
+            <TextBlock Text="Spätschicht" Margin="5,0,0,0" VerticalAlignment="Center"/>
+            <Rectangle Fill="LightCoral" Width="20" Margin="20,0,0,0"/>
+            <TextBlock Text="Nachtschicht" Margin="5,0,0,0" VerticalAlignment="Center"/>
+        </StackPanel>
+        
         <Grid Margin="10,10,5,0" Height="320">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*"/>
@@ -40,13 +49,13 @@
                     <RowDefinition Height="4*"/>
                     <RowDefinition Height="4*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Mo." FontWeight="Bold" Grid.Column="0" Grid.Row="0"/>
-                <TextBlock Text="Di." FontWeight="Bold" Grid.Column="1" Grid.Row="0"/>
-                <TextBlock Text="Mi." FontWeight="Bold" Grid.Column="2" Grid.Row="0"/>
-                <TextBlock Text="Do." FontWeight="Bold" Grid.Column="3" Grid.Row="0"/>
-                <TextBlock Text="Fr." FontWeight="Bold" Grid.Column="4" Grid.Row="0"/>
-                <TextBlock Text="Sa." FontWeight="Bold" Grid.Column="5" Grid.Row="0"/>
-                <TextBlock Text="So." FontWeight="Bold" Grid.Column="6" Grid.Row="0"/>
+                <TextBlock Text="Mo." FontWeight="Bold" Grid.Column="0" Grid.Row="0" x:Name="headerMo"/>
+                <TextBlock Text="Di." FontWeight="Bold" Grid.Column="1" Grid.Row="0" x:Name="headerDi"/>
+                <TextBlock Text="Mi." FontWeight="Bold" Grid.Column="2" Grid.Row="0" x:Name="headerMi"/>
+                <TextBlock Text="Do." FontWeight="Bold" Grid.Column="3" Grid.Row="0" x:Name="headerDo"/>
+                <TextBlock Text="Fr." FontWeight="Bold" Grid.Column="4" Grid.Row="0" x:Name="headerFr"/>
+                <TextBlock Text="Sa." FontWeight="Bold" Grid.Column="5" Grid.Row="0" x:Name="headerSa"/>
+                <TextBlock Text="So." FontWeight="Bold" Grid.Column="6" Grid.Row="0" x:Name="headerSo"/>
                 <!--Montag-->
                 <StackPanel Grid.Row="1" Grid.Column="0" x:Name="montagFrüh" Background="LightSkyBlue" AllowDrop="True" Drop="handleDrop"/>
                 <StackPanel Grid.Row="2" Grid.Column="0" x:Name="montagSpät" Background="LightGreen" AllowDrop="True" Drop="handleDrop"/>

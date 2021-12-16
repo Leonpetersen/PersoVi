@@ -21,20 +21,15 @@
                 <ToolBar Background="Transparent" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
                     <Menu Background="Transparent" ToolBar.OverflowMode="Never">
                         <TextBox DockPanel.Dock="Top" Name="txtFilter" Grid.Row="1" Height="25" Width="200" HorizontalAlignment="Left" />
-                        <Button Background="Transparent" Margin="-15,0,0,0">
-                            <TextBlock Foreground="White" FontSize="20">🔍</TextBlock>
+
+                        <ComboBox Width="200" Margin="0,0,0,0" Height="25">Kalender</ComboBox>
+                        <Button Background="Transparent" Width="50" ToolTip="Anzeigen">
+                            <TextBlock Foreground="White" FontSize="20">👁</TextBlock>
                         </Button>
-                        <ComboBox Width="200" Margin="0,0,50,0" Height="25">Kalender</ComboBox>
-                        <Button Background="Transparent"  Width="50">
-                            <TextBlock Foreground="White" FontSize="20">✏️</TextBlock>
-                        </Button>
-                        <Button Background="Transparent" Width="50">
-                            <TextBlock Foreground="White" FontSize="20">💡</TextBlock>
-                        </Button>
-                        <Button Background="Transparent" Width="50">
+                        <Button Background="Transparent" Width="50" ToolTip="Drucken">
                             <TextBlock Foreground="White" FontSize="20">🖨️</TextBlock>
                         </Button>
-                        <Button Background="Transparent" Width="50">
+                        <Button Background="Transparent" Width="50" ToolTip="Herunterladen">
                             <TextBlock Foreground="White" FontSize="20">📥</TextBlock>
                         </Button>
                     </Menu>
@@ -46,22 +41,10 @@
                     <GridView>
                         <GridViewColumn Width="200">Personalnummer</GridViewColumn>
                         <GridViewColumn Width="200">Name</GridViewColumn>
-                        <GridViewColumn Width="Auto"> Vorname</GridViewColumn>
+                        <GridViewColumn Width="Auto">Vorname</GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
-            <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Left">
-                <Button Background="Transparent" Height="30" Width="100" Margin="10,0,0,0" x:Name="download">
-                    <TextBlock Foreground="White" FontSize="20">
-                    💾
-                    </TextBlock>
-                </Button>
-                <Button Background="Transparent" Height="30" Width="100" Margin="10,0,0,0" x:Name="print">
-                    <TextBlock Foreground="White" FontSize="20">
-                    🖨️
-                    </TextBlock>
-                </Button>
-            </StackPanel>
         </Grid>
     </Border>
 </UserControl>

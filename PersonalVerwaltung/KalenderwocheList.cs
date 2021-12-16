@@ -18,34 +18,6 @@ namespace PersonalVerwaltung
             sunday = kalenderwoche.Enddatum;
             this.Add(kalenderwoche);
 
-            /**
-            DateTime monday; DateTime sunday;
-            int currentWeek = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
-            DayOfWeek currentDay = DateTime.Now.DayOfWeek;
-
-            //Ermittle Montag und Sonntag der aktuellen Woche
-            if (currentDay != DayOfWeek.Monday)
-            {
-                int dayoffset = GetDayCountFromMonday(currentDay);
-                monday = DateTime.Now.AddDays(-dayoffset);
-                sunday = monday.AddDays(6);
-            }
-            else
-            {
-                monday = DateTime.Now;
-                sunday = monday.AddDays(6);
-            }
-
-            kalenderwoche = new Kalenderwoche()
-            {
-                Wochennr = currentWeek,
-                Wochenbezeichnung = "KW " + currentWeek + " " + DateTime.Now.Year,
-                Startdatum = monday,
-                Enddatum = sunday
-
-            };
-            */
-
             while (currentWeek != 1)
             {
                 //KW Vorwoche berechnen

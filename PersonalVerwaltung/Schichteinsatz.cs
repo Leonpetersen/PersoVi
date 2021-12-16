@@ -43,6 +43,40 @@ namespace PersonalVerwaltung
             }
         }
 
+        public static bool deleteShiftEntry(int employeenr, int shiftnr)
+        {
+            DbConnector dbConnector = new DbConnector();
+
+            if (dbConnector.dbConn != null)
+            {
+
+                string delete = "DELETE FROM schichteinsatz WHERE schichtnr = @snr AND personalnr = @pnr";
+
+                MySqlCommand delete_cmd = new MySqlCommand(delete, dbConnector.dbConn);
+
+                delete_cmd.Parameters.AddWithValue("@snr", shiftnr);
+                delete_cmd.Parameters.AddWithValue("@pnr", employeenr);
+
+                dbConnector.dbConn.Open();
+                int status = delete_cmd.ExecuteNonQuery();
+                dbConnector.dbConn.Close();
+
+                if (status > 0) //Delete erfolgreich
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public static int getShiftNr(DateTime? date, string type)
         {
             DbConnector dbConnector = new DbConnector();
@@ -71,6 +105,31 @@ namespace PersonalVerwaltung
                 
             }
             return shiftNr;
+        }
+
+        public static bool checkNewShiftEntry(int employeenr, int shiftnr)
+        {
+            DbConnector dbConnector = new DbConnector();
+            string count;
+
+            count = "SELECT COUNT(schichtnr) FROM schichteinsatz WHERE schichtnr = @snr AND personalnr = @pnr"; 
+
+            MySqlCommand count_cmd = new MySqlCommand(count, dbConnector.dbConn);
+            count_cmd.Parameters.AddWithValue("@snr", shiftnr);
+            count_cmd.Parameters.AddWithValue("@pnr", employeenr);
+
+            dbConnector.dbConn.Open();
+            int i = (int)(long)count_cmd.ExecuteScalar();
+            dbConnector.dbConn.Close();
+
+            if (i == 0) //Mitarbeiter ist noch nicht in Schicht vorhanden
+            {
+                return true;
+            }
+            else //Mitarbeiter ist der Schicht bereits zugeteilt
+            {
+                return false;
+            }
         }
 
     }

@@ -224,7 +224,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\die-einstellungen.png" />
     <Resource Include="Images\geld-bekommen.png" />
@@ -241,6 +240,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\drucken.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\shutdown.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
