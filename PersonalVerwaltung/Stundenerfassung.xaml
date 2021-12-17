@@ -24,11 +24,8 @@
                 <Menu Background="Transparent" ToolBar.OverflowMode="Never">
                     <TextBox DockPanel.Dock="Top" Name="txtFilter" TextChanged="txtFilter_TextChanged" Grid.Row="1" Height="25" Width="200" HorizontalAlignment="Left" />
                     <ComboBox Name="combo_kw" Width="200" Height="25" ItemsSource="{StaticResource kalenderwochen}" DisplayMemberPath="Wochenbezeichnung" SelectedIndex="0" SelectionChanged="refreshTimeTable"/>
-                    <Button Background="Transparent"  Width="50" Click="createTimeRecord">
+                    <Button Background="Transparent"  Width="50" Click="createTimeRecord" ToolTip="Zeit erfassen">
                         <TextBlock Foreground="White" FontSize="20">➕</TextBlock>
-                    </Button>
-                    <Button Background="Transparent" Width="50">
-                        <TextBlock Foreground="White" FontSize="20">💡</TextBlock>
                     </Button>
                 </Menu>
             </ToolBar>

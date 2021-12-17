@@ -54,9 +54,12 @@ namespace PersonalVerwaltung
         }
         private void einstellungen(object sender, RoutedEventArgs e)
         {
+            /*
             grid1.Children.Clear();
             Einstellungen usercontrol = new Einstellungen();
             grid1.Children.Add(usercontrol);
+            */
+            MessageBox.Show("Funktion noch nicht implementiert!");
         }
         private void Logout (object sender,RoutedEventArgs e)
         {

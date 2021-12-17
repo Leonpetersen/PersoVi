@@ -132,5 +132,33 @@ namespace PersonalVerwaltung
             }
         }
 
+        public static bool createShift(string art, DateTime beginn, DateTime ende)
+        {
+            DbConnector dbConnector = new DbConnector();
+            string query;
+
+            query = "INSERT INTO schichten (art, beginn, ende)" +
+                            "VALUES (@type, @beg, @end)";
+
+            MySqlCommand insert = new MySqlCommand(query, dbConnector.dbConn);
+            insert.Parameters.AddWithValue("@type", art);
+            insert.Parameters.AddWithValue("@beg", beginn);
+            insert.Parameters.AddWithValue("@end", ende);
+
+
+            dbConnector.dbConn.Open();
+            int status = insert.ExecuteNonQuery();
+            dbConnector.dbConn.Close();
+
+            if (status > 0) //Insert erfolgreich
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

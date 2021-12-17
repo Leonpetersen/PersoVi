@@ -87,7 +87,7 @@ namespace PersonalVerwaltung
 
             //Planer initialisieren
             Kalenderwoche kalenderwoche = (Kalenderwoche)combo_kw.SelectedItem;
-            
+
             DateTime datum = kalenderwoche.Startdatum;
 
             for (int i = 0; i <= 6; i++)
@@ -211,7 +211,7 @@ namespace PersonalVerwaltung
                             break;
                     }
                 }
-                
+
             }
 
             headerMo.Text = headerMo.Text + wochentage[0].Date.ToShortDateString();
@@ -250,7 +250,7 @@ namespace PersonalVerwaltung
             switch (stackPanel.Name)
             {
                 case "montagFrüh":
-                    datum = wochentage[0] + new TimeSpan(6,0,0);
+                    datum = wochentage[0] + new TimeSpan(6, 0, 0);
                     art = "F";
                     break;
                 case "montagSpät":
@@ -334,42 +334,56 @@ namespace PersonalVerwaltung
                     art = "N";
                     break;
             }
-
-            int shiftnr = Schichteinsatz.getShiftNr(datum, art);
+            int shiftnr;
+            shiftnr = Schichteinsatz.getShiftNr(datum, art);
             if (shiftnr == 0)
             {
-                string message = "Für den " + datum.Value.Date.ToShortDateString() + " ist keine Schicht auf der Datenbank vorhanden!";
-                MessageBox.Show(message);
-            }
-            else
-            {
-                bool result;
-                result = Schichteinsatz.checkNewShiftEntry(employeenr, shiftnr);
-                if (result == true)
+                DateTime endDatum; DateTime startDatum;
+                startDatum = (DateTime)datum;
+                //Neue Schicht anlegen
+                if (art == "N")
                 {
-                    result = Schichteinsatz.createShiftEntry(employeenr, shiftnr);
-                    if (result == true)
-                    {
-                        Button newButton = new Button();
-                        newButton.Name = "e" + employeenr.ToString();
-                        newButton.Content = name;
-                        newButton.FontSize = 12;
-                        newButton.HorizontalContentAlignment = HorizontalAlignment.Left;
-                        newButton.Click += new RoutedEventHandler(removeEmployee);
-                        stackPanel.Children.Add(newButton);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Fehler beim Erfassen der Schichtzuordnung!");
-                    }
+                    endDatum = datum.Value.Date.AddDays(1) + new TimeSpan(6, 0, 0);
+                }
+                else if (art == "F")
+                {
+                    endDatum = datum.Value.Date + new TimeSpan(14, 0, 0);
                 }
                 else
                 {
-
-                    MessageBox.Show("Mitarbeiter/in " + name + " ist der Schicht bereits zugeordnet!");
+                    endDatum = datum.Value.Date + new TimeSpan(22, 0, 0);
                 }
-   
+
+                Schichteinsatz.createShift(art, startDatum, endDatum);
+                shiftnr = Schichteinsatz.getShiftNr(datum, art);
             }
+            bool result;
+            result = Schichteinsatz.checkNewShiftEntry(employeenr, shiftnr);
+            if (result == true)
+            {
+                result = Schichteinsatz.createShiftEntry(employeenr, shiftnr);
+                if (result == true)
+                {
+                    Button newButton = new Button();
+                    newButton.Name = "e" + employeenr.ToString();
+                    newButton.Content = name;
+                    newButton.FontSize = 12;
+                    newButton.HorizontalContentAlignment = HorizontalAlignment.Left;
+                    newButton.Click += new RoutedEventHandler(removeEmployee);
+                    stackPanel.Children.Add(newButton);
+                }
+                else
+                {
+                    MessageBox.Show("Fehler beim Erfassen der Schichtzuordnung!");
+                }
+            }
+            else
+            {
+
+                MessageBox.Show("Mitarbeiter/in " + name + " ist der Schicht bereits zugeordnet!");
+            }
+
+
 
         }
 
@@ -486,7 +500,7 @@ namespace PersonalVerwaltung
                 case MessageBoxResult.No:
                     break;
             }
-           
+
         }
 
         private List<Schichteinsatz> getShiftInformation(Kalenderwoche kalenderwoche)
@@ -707,7 +721,7 @@ namespace PersonalVerwaltung
                 headerSo.Text = "So." + wochentage[6].Date.ToShortDateString();
 
             }
-            
+
         }
     }
 }

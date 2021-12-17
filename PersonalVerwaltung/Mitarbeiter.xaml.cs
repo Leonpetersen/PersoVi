@@ -84,40 +84,54 @@ namespace PersonalVerwaltung
         }
         private void Btn_Remove(object sender, RoutedEventArgs e)
         {
-            bool status = false;
-            MessageBoxResult result = MessageBox.Show("Soll der Mitarbeiter von der Datenbank entfernt werden?", "Mitarbeiter löschen", MessageBoxButton.YesNo);
-            switch (result)
+            if (mitarbeiter.SelectedItem != null)
             {
-                case MessageBoxResult.Yes:
-                    Employee employee = (Employee)mitarbeiter.SelectedItem;
-                    status = employee.deleteEmployee();
-                    break;
-                case MessageBoxResult.No:
-                    break;
-            }
+                bool status = false;
+                MessageBoxResult result = MessageBox.Show("Soll der Mitarbeiter von der Datenbank entfernt werden?", "Mitarbeiter löschen", MessageBoxButton.YesNo);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        Employee employee = (Employee)mitarbeiter.SelectedItem;
+                        status = employee.deleteEmployee();
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
 
-            if (status == true)
+                if (status == true)
+                {
+                    //Refresh Mitarbeiter Liste
+                    EmployeeList employeeList = (EmployeeList)this.TryFindResource("employeeList");
+                    employeeList.Refresh();
+                    EmployeeView.Refresh();
+
+                    MessageBox.Show("Mitarbeiter erfolgreich entfernt!");
+                }
+            }
+            else
             {
-                //Refresh Mitarbeiter Liste
-                EmployeeList employeeList = (EmployeeList)this.TryFindResource("employeeList");
-                employeeList.Refresh();
-                EmployeeView.Refresh();
-
-                MessageBox.Show("Mitarbeiter erfolgreich entfernt!");
+                MessageBox.Show("Es muss eine/n Mitarbeiter/in aus der Liste ausgewählt werden!");
             }
-
         }
         private void Btn_Show(object sender, RoutedEventArgs e)
         {
-            MAanzeige maAnzeige = new MAanzeige((Employee)mitarbeiter.SelectedItem);
-            bool? dialogStatus = maAnzeige.ShowDialog();
-            if (dialogStatus == true)
+            if (mitarbeiter.SelectedItem != null)
             {
-                //Refresh Mitarbeiter Liste
-                EmployeeList employeeList = (EmployeeList)this.TryFindResource("employeeList");
-                employeeList.Refresh();
-                EmployeeView.Refresh();
+                MAanzeige maAnzeige = new MAanzeige((Employee)mitarbeiter.SelectedItem);
+                bool? dialogStatus = maAnzeige.ShowDialog();
+                if (dialogStatus == true)
+                {
+                    //Refresh Mitarbeiter Liste
+                    EmployeeList employeeList = (EmployeeList)this.TryFindResource("employeeList");
+                    employeeList.Refresh();
+                    EmployeeView.Refresh();
+                }
             }
+            else
+            {
+                MessageBox.Show("Es muss eine/n Mitarbeiter/in aus der Liste ausgewählt werden!");
+            }
+  
         }
         private void showEmployee(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

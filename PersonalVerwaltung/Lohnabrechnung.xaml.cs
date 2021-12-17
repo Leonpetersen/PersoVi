@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Aspose.Pdf;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,12 @@ namespace PersonalVerwaltung
     /// </summary>
     public partial class Lohnabrechnung : UserControl
     {
+        public CollectionView EmployeeView;
         public Lohnabrechnung()
         {
             InitializeComponent();
+            EmployeeView = (CollectionView)CollectionViewSource.GetDefaultView(employeeList.ItemsSource);
+            EmployeeView.Filter = UserFilter;
 
             //ComboBox Monate füllen
             combo_month.Items.Add("Januar");
@@ -92,6 +97,46 @@ namespace PersonalVerwaltung
             }
 
         }
+        private bool UserFilter(object item)
+        {
+            bool entryExists;
+
+            if (String.IsNullOrEmpty(txtFilter.Text))
+            {
+                //return true;
+                entryExists = true;
+            }
+            else
+            {
+                //Prüfe Personalnummer
+                if (((item as Employee).Employeenr.ToString().IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    entryExists = true;
+                }
+                //Prüfe Vorname
+                else if (((item as Employee).Firstname.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    entryExists = true;
+                }
+                //Prüfe Nachname
+                else if (((item as Employee).Lastname.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    entryExists = true;
+                }
+                else
+                {
+                    entryExists = false;
+                }
+
+            }
+            return entryExists;
+
+        }
+
+        private void txtFilter_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            EmployeeView.Refresh();
+        }
         private void Btn_Show(object sender, RoutedEventArgs e)
         {
 
@@ -111,9 +156,30 @@ namespace PersonalVerwaltung
             }
         }
 
-        private void showPayroll(object sender, MouseButtonEventArgs e)
+        private void downloadPayroll(object sender, RoutedEventArgs e)
         {
+            if (employeeList.SelectedItem != null)
+            {
+                Employee employee = (Employee)employeeList.SelectedItem;
+                string monat = combo_month.SelectedItem.ToString();
+                int jahr = (int)combo_year.SelectedItem;
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.DefaultExt = ".pdf";
+                saveFileDialog.Filter = "PDF files|*.pdf";
+                saveFileDialog.FileName = "lohnabrechnung_" + employee.Firstname.ToLower() + "_" + employee.Lastname.ToLower();
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    Document payroll = PdfHandling.createPayrollPdf(employee, monat, jahr);
+                    payroll.Save(saveFileDialog.FileName);
+                    System.Diagnostics.Process.Start(saveFileDialog.FileName);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Es muss eine/n Mitarbeiter/in aus der Liste ausgewählt werden!");
+            }
 
+            
         }
     }
 }

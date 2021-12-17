@@ -41,7 +41,7 @@
             <Label Content="Ort:" Margin="80,0,0,0"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <ComboBox x:Name="combo_plz" ItemsSource="{StaticResource ortList}" DisplayMemberPath="LandPlz" Width="80" SelectionChanged="onSelectionChangedPlz" SelectedValuePath="Plz"/>
+            <ComboBox x:Name="combo_plz" ItemsSource="{StaticResource ortList}" DisplayMemberPath="LandPlz" Width="100" SelectionChanged="onSelectionChangedPlz" SelectedValuePath="Plz"/>
             <TextBox x:Name="ort" Margin="15,0,0,0" Width="150"/>
         </StackPanel>
         <Label Content="Familienstand:"/>
@@ -57,18 +57,18 @@
         <Label Content="Eintrittsdatum:"/>
         <DatePicker Name="eintritt" Width="150" HorizontalAlignment="Left" SelectedDate="{x:Static sys:DateTime.Now}"/>
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                <Button Background="Transparent" Width="50" Click="changeEditMode">
+                <Button Background="Transparent" Width="50" Click="changeEditMode" ToolTip="Bearbeiten">
                             <TextBlock Foreground="White" FontSize="20">✏️</TextBlock>
                         </Button>
-                <Button Background="Transparent" Click="saveChanges">
+                <Button Background="Transparent" Click="saveChanges" ToolTip="Speichern">
                     <TextBlock FontSize="20">
                  💾
                     </TextBlock>
                 </Button>
-                <Button Background="Transparent" Width="50" Click="deleteEmployee">
+                <Button Background="Transparent" Width="50" Click="deleteEmployee" ToolTip="Löschen">
                             <TextBlock Foreground="White" FontSize="20">🗑️</TextBlock>
                         </Button>
-                <Button Background="Transparent" Width="50" Click="closeWindow">
+                <Button Background="Transparent" Width="50" Click="closeWindow" ToolTip="Schließen">
                     <TextBlock Foreground="White" FontSize="20"> ❌</TextBlock>
                 </Button>
             </StackPanel>

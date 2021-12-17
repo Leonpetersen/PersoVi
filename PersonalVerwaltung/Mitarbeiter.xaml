@@ -20,13 +20,13 @@
             <ToolBar Background="Transparent" ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
                 <Menu Background="Transparent" ToolBar.OverflowMode="Never">
                     <TextBox Name="txtFilter" TextChanged="txtFilter_TextChanged" Grid.Row="1" Height="25" Width="200" HorizontalAlignment="Left" />
-                    <Button Background="Transparent"  Width="50" x:Name="btn_add" Click="Btn_Add">
+                    <Button Background="Transparent"  Width="50" x:Name="btn_add" Click="Btn_Add" ToolTip="Anlegen">
                         <TextBlock Foreground="White" FontSize="20">➕</TextBlock>
                     </Button>
-                    <Button Background="Transparent" Width="50" x:Name="btn_show" Click="Btn_Show">
+                    <Button Background="Transparent" Width="50" x:Name="btn_show" Click="Btn_Show" ToolTip="Anzeigen">
                         <TextBlock Foreground="White" FontSize="20">💡</TextBlock>
                     </Button>
-                    <Button Background="Transparent" Width="50" x:Name="btn_remove" Click="Btn_Remove">
+                    <Button Background="Transparent" Width="50" x:Name="btn_remove" Click="Btn_Remove" ToolTip="Löschen">
                         <TextBlock Foreground="White" FontSize="20">🗑️</TextBlock>
                     </Button>
                 </Menu>

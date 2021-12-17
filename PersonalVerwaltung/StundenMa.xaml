@@ -12,6 +12,9 @@
         AllowsTransparency="True">
     <Window.Resources>
         <local:WorkingDayEmployeeList x:Key="workingDayEmployeeList"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Arial rounded MT"/>
+        </Style>
     </Window.Resources>
 
     <Border Background="#272537" CornerRadius="20" BorderBrush="#37344e" BorderThickness="2">
