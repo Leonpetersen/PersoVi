@@ -96,6 +96,7 @@
     <Compile Include="Mitarbeiter.xaml.cs">
       <DependentUpon>Mitarbeiter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Monat.cs" />
     <Compile Include="Ort.cs" />
     <Compile Include="OrtList.cs" />
     <Compile Include="PersoEdit.xaml.cs">

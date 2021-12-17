@@ -76,7 +76,7 @@
             <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="user" FontSize="15"/>
-                    <Button x:Name="btn_logout" Click="Logout" FontFamily="Arial rounded MT" Margin="10,0,10,0" ToolTip="Ausloggen">
+                    <Button x:Name="btn_logout" Click="Logout" FontFamily="Arial rounded MT" Margin="10,0,10,0" ToolTip="Abmelden">
                         <Image Source="Images/shutdown.png" Width="20" VerticalAlignment="Center"/>
                     </Button>
                 </StackPanel>
