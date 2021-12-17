@@ -21,7 +21,7 @@ namespace PersonalVerwaltung
             seite1.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(employee.Zipcode + " " + new Ort(employee.Country, employee.Zipcode).Ortsname));
             seite1.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(employee.Email));
 
-            seite1.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment("\n \n \nIhre Lohnabrechnung für den Zeitraum " + monat + " " + jahr + ":" + "\n\n\n\n\n"));
+            seite1.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment("\n \n \nIhre Lohnabrechnung für den Zeitraum " + monat + " " + jahr + ":" + "\n\n\n\n"));
 
             //Tabelle
             Aspose.Pdf.Table table = new Aspose.Pdf.Table();
@@ -31,15 +31,15 @@ namespace PersonalVerwaltung
             //Zeile für Monatliche Arbeitszeit
             Row row1 = table.Rows.Add();
             row1.Cells.Add("Monatliche Arbeitszeit:");
-            //row1.Cells.Add();
+            row1.Cells.Add("0,00");
             //Zeile für Stundenlohn
             Row row2 = table.Rows.Add();
             row2.Cells.Add("Stundenlohn:");
-            //row2.Cells.Add("Stundenlohn:");
+            row2.Cells.Add("0,00");
             //Zeile für Bruttolohn
             Row row3 = table.Rows.Add();
             row3.Cells.Add("Bruttolohn:");
-            //row3.Cells.Add("Bruttolohn:");
+            row3.Cells.Add("0,00");
             //Zeile für Steuerabzüge
             Row row4 = table.Rows.Add();
             row4.Cells.Add("Steuerabzüge:");
@@ -51,6 +51,7 @@ namespace PersonalVerwaltung
             //Zeile für Nettolohn
             Row row6 = table.Rows.Add();
             row6.Cells.Add("Nettolohn:");
+            row6.Cells.Add("0,00");
 
 
             //Tabbele einfügen
